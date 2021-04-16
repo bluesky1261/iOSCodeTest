@@ -12,6 +12,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var pictureCollectionView: UICollectionView!
     // MARK: - Public properties -
 
     var presenter: MainPresenterInterface!
@@ -30,7 +32,83 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: MainViewInterface {
     func setupUI() {
+        let pictureCollectionViewLayout = UICollectionViewFlowLayout()
 
+        pictureCollectionViewLayout.headerReferenceSize = .zero
+        pictureCollectionViewLayout.footerReferenceSize = .zero
+        pictureCollectionViewLayout.scrollDirection = .vertical
+        pictureCollectionViewLayout.sectionInset = .zero
+
+        pictureCollectionView.setCollectionViewLayout(pictureCollectionViewLayout, animated: false)
+
+        pictureCollectionView.dataSource = self
+        pictureCollectionView.delegate = self
+
+        let pictureBundle = Bundle(for: MainPictureCell.self)
+        let pictureNib = UINib(nibName: String(describing: MainPictureCell.self), bundle: pictureBundle)
+
+        pictureCollectionView.register(pictureNib, forCellWithReuseIdentifier: String(describing: MainPictureCell.self))
+
+        let categoryCollectionViewLayout = UICollectionViewFlowLayout()
+
+        categoryCollectionViewLayout.headerReferenceSize = .zero
+        categoryCollectionViewLayout.footerReferenceSize = .zero
+        categoryCollectionViewLayout.scrollDirection = .horizontal
+        categoryCollectionViewLayout.sectionInset = .zero
+
+        categoryCollectionView.setCollectionViewLayout(categoryCollectionViewLayout, animated: false)
+
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.delegate = self
+
+        let categoryBundle = Bundle(for: MainCategoryCell.self)
+        let categoryNib = UINib(nibName: String(describing: MainCategoryCell.self), bundle: categoryBundle)
+
+        categoryCollectionView.register(categoryNib, forCellWithReuseIdentifier: String(describing: MainCategoryCell.self))
+        
     }
 
+}
+
+extension MainViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == categoryCollectionView {
+            let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainCategoryCell.self), for: indexPath) as! MainCategoryCell
+
+            return cell
+        } else if collectionView == pictureCollectionView {
+            let cell = pictureCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainPictureCell.self), for: indexPath) as! MainPictureCell
+
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+
+        presenter.moveToDetail()
+    }
+
+}
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == pictureCollectionView {
+            return CGSize(width: collectionView.frame.width, height: 200)
+        } else if collectionView == categoryCollectionView {
+            return CGSize(width: 60, height: 30)
+        } else {
+            return .zero
+        }
+    }
 }

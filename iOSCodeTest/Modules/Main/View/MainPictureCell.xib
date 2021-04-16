@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MainPictureCell" customModule="iOSCodeTest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So1-Or-mLv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HDQ-yc-hfP">
+                                <rect key="frame" x="0.0" y="2.5" width="375" height="295.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLC-uF-NNt">
+                                <rect key="frame" x="10" y="256" width="76.5" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="UKx-sK-cTB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsor Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOp-2f-gZq">
+                                <rect key="frame" x="10" y="273" width="83.5" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="uKP-qX-F8e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="HDQ-yc-hfP" secondAttribute="bottom" id="70P-mr-es7"/>
+                            <constraint firstItem="HDQ-yc-hfP" firstAttribute="top" secondItem="So1-Or-mLv" secondAttribute="top" id="7K0-ro-JJb"/>
+                            <constraint firstItem="VLC-uF-NNt" firstAttribute="leading" secondItem="So1-Or-mLv" secondAttribute="leading" constant="10" id="A1J-MY-bx3"/>
+                            <constraint firstItem="IOp-2f-gZq" firstAttribute="top" secondItem="VLC-uF-NNt" secondAttribute="bottom" constant="3" id="FaA-Mj-tQc"/>
+                            <constraint firstItem="HDQ-yc-hfP" firstAttribute="leading" secondItem="So1-Or-mLv" secondAttribute="leading" id="ILi-BH-r2m"/>
+                            <constraint firstAttribute="bottom" secondItem="VLC-uF-NNt" secondAttribute="bottom" constant="30" id="U1O-Xq-xPr"/>
+                            <constraint firstAttribute="trailing" secondItem="HDQ-yc-hfP" secondAttribute="trailing" id="k7L-ZH-4pT"/>
+                            <constraint firstItem="IOp-2f-gZq" firstAttribute="leading" secondItem="So1-Or-mLv" secondAttribute="leading" constant="10" id="sAZ-ah-sUi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="So1-Or-mLv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MWe-bZ-kQ4"/>
+                <constraint firstAttribute="bottom" secondItem="So1-Or-mLv" secondAttribute="bottom" id="U1Y-um-RVh"/>
+                <constraint firstItem="So1-Or-mLv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cfw-7E-lyk"/>
+                <constraint firstAttribute="trailing" secondItem="So1-Or-mLv" secondAttribute="trailing" id="xjw-EV-wMD"/>
+            </constraints>
+            <connections>
+                <outlet property="pictureImageView" destination="HDQ-yc-hfP" id="9Xh-b0-Uec"/>
+                <outlet property="pictureNameLabel" destination="VLC-uF-NNt" id="AL5-m8-evP"/>
+                <outlet property="sponsorNameLabel" destination="IOp-2f-gZq" id="Rgs-vF-SMH"/>
+            </connections>
+            <point key="canvasLocation" x="116.66666666666667" y="127.90178571428571"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

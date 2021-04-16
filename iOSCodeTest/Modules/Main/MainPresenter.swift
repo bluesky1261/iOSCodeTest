@@ -30,4 +30,13 @@ final class MainPresenter {
 // MARK: - Extensions -
 
 extension MainPresenter: MainPresenterInterface {
+    func moveToDetail() {
+        wireframe.navigate(to: .detail(self))
+    }
+}
+
+extension MainPresenter: DelegatePresenterInterface {
+    func passData(sender: PresenterInterface, data: [String : Any]?) {
+    
+    }
 }

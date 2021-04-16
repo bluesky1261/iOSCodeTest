@@ -11,6 +11,7 @@
 import UIKit
 
 enum MainNavigationOption {
+    case detail(DelegatePresenterInterface)
 }
 
 protocol MainWireframeInterface: WireframeInterface {
@@ -21,6 +22,7 @@ protocol MainViewInterface: ViewInterface {
 }
 
 protocol MainPresenterInterface: PresenterInterface {
+    func moveToDetail()
 }
 
 protocol MainInteractorInterface: InteractorInterface {

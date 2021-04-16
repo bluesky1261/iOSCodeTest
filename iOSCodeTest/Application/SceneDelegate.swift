@@ -21,8 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        // 최초 화면은 MainWireframe
-        window?.rootViewController = MainWireframe().viewController
+        // 최초 화면은 MainWireframe이 Root인 Navigation Controller
+        let navigationController = UINavigationController(rootViewController: MainWireframe().viewController)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
