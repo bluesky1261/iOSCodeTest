@@ -11,7 +11,7 @@
 import UIKit
 
 enum MainNavigationOption {
-    case detail(DelegatePresenterInterface)
+    case detail(DelegatePresenterInterface, Int, Int, [Int:[PhotoModel]])
 }
 
 protocol MainWireframeInterface: WireframeInterface {
@@ -19,11 +19,24 @@ protocol MainWireframeInterface: WireframeInterface {
 }
 
 protocol MainViewInterface: ViewInterface {
+    func updateTopicList()
+    func updatePhotoList()
+    func updatePhotoListWithPosition(currentSection: Int, currentIndex: Int)
 }
 
 protocol MainPresenterInterface: PresenterInterface {
-    func moveToDetail()
+    func getTopicSection() -> Int
+    func getTopicSectionList(for section: Int) -> [TopicModel]
+    func getTopicSectionCount() -> Int
+    func getPhotoSection() -> Int
+    func getPhotoSectionList(for section: Int) -> [PhotoModel]
+    func getPhotoSectionCount() -> Int
+    
+    func moveToDetail(section: Int, index: Int)
+    func requestMorePhoto()
 }
 
 protocol MainInteractorInterface: InteractorInterface {
+    func listTopics(page: Int, completion: @escaping TopicListCompletionHandler)
+    func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler)
 }

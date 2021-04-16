@@ -18,12 +18,12 @@ final class DetailWireframe: BaseWireframe {
 
     // MARK: - Module setup -
 
-    init(delegate: DelegatePresenterInterface) {
+    init(delegate: DelegatePresenterInterface, section: Int, index: Int, photoModels: [Int:[PhotoModel]]) {
         let moduleViewController = storyboard.instantiateViewController(ofType: DetailViewController.self)
         super.init(viewController: moduleViewController)
 
         let interactor = DetailInteractor()
-        let presenter = DetailPresenter(delegate: delegate, view: moduleViewController, interactor: interactor, wireframe: self)
+        let presenter = DetailPresenter(delegate: delegate, view: moduleViewController, interactor: interactor, wireframe: self, section: section, index: index, photoModels: photoModels)
         moduleViewController.presenter = presenter
     }
 

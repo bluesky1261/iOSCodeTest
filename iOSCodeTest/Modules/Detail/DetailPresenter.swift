@@ -18,20 +18,52 @@ final class DetailPresenter {
     private let interactor: DetailInteractorInterface
     private let wireframe: DetailWireframeInterface
 
+    private var currentPhotoSection: Int
+    private var currentPhotoIndex: Int
+    private var photoModels: [Int:[PhotoModel]]
+
     // Main Module에 데이터를 전달하기 위한 delegate
     private weak var delegate: DelegatePresenterInterface?
 
     // MARK: - Lifecycle -
 
-    init(delegate: DelegatePresenterInterface, view: DetailViewInterface, interactor: DetailInteractorInterface, wireframe: DetailWireframeInterface) {
+    init(delegate: DelegatePresenterInterface, view: DetailViewInterface, interactor: DetailInteractorInterface, wireframe: DetailWireframeInterface, section: Int, index: Int, photoModels: [Int:[PhotoModel]]) {
         self.delegate = delegate
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
+        self.currentPhotoSection = section
+        self.currentPhotoIndex = index
+        self.photoModels = photoModels
     }
 }
 
 // MARK: - Extensions -
 
 extension DetailPresenter: DetailPresenterInterface {
+    func getCurrentPhotoSection() -> Int {
+        return currentPhotoSection
+    }
+
+    func getCurrentPhotoIndex() -> Int {
+        return currentPhotoIndex
+    }
+
+    func getPhotoSectionList(for section: Int) -> [PhotoModel] {
+        return photoModels[section] ?? [PhotoModel]()
+    }
+
+    func getSectionCount() -> Int {
+        return photoModels.count
+    }
+
+    func updateCurrentPosition(section: Int, index: Int) {
+        self.currentPhotoSection = section
+        self.currentPhotoIndex = index
+    }
+
+    func passCurrentPhotoInfo() {
+        let currentPhotoInfo: [String : Any] = ["section": currentPhotoSection, "index": currentPhotoIndex, "photoModels": photoModels]
+        delegate?.passData(sender: self, data: currentPhotoInfo)
+    }
 }

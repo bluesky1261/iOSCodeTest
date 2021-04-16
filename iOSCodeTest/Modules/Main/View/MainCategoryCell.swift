@@ -11,6 +11,12 @@ class MainCategoryCell: UICollectionViewCell {
 
     @IBOutlet weak var categoryLabel: UILabel!
 
+    var topicItem: TopicModel? {
+        didSet {
+            updateCell()
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -23,7 +29,10 @@ class MainCategoryCell: UICollectionViewCell {
     }
 
     func initUI() {
-        //categoryLabel.text = ""
+        categoryLabel.text = ""
     }
 
+    func updateCell() {
+        categoryLabel.text = topicItem?.title
+    }
 }

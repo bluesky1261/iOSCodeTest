@@ -24,6 +24,10 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+
+        detailCollectionView.reloadData()
+        detailCollectionView.layoutIfNeeded()
+        detailCollectionView.scrollToItem(at: IndexPath(item: presenter.getCurrentPhotoIndex(), section: presenter.getCurrentPhotoSection()), at: .centeredHorizontally, animated: false)
     }
 }
 
@@ -31,6 +35,12 @@ final class DetailViewController: UIViewController {
 
 extension DetailViewController: DetailViewInterface {
     func setupUI() {
+        navigationItem.hidesBackButton = true
+
+        let closeButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(closeButtonTouched(sender:)))
+        closeButton.tintColor = .black
+        navigationItem.leftBarButtonItem = closeButton
+
         let detailCollectionViewLayout = UICollectionViewFlowLayout()
 
         detailCollectionViewLayout.scrollDirection = .horizontal
@@ -43,6 +53,7 @@ extension DetailViewController: DetailViewInterface {
         detailCollectionView.isPagingEnabled = true
         detailCollectionView.alwaysBounceHorizontal = true
 
+        detailCollectionView.delegate = self
         detailCollectionView.dataSource = self
 
         let bundle = Bundle(for: DetailPictureCell.self)
@@ -52,18 +63,42 @@ extension DetailViewController: DetailViewInterface {
     }
 }
 
+private extension DetailViewController {
+    @objc func closeButtonTouched(sender: UIBarButtonItem) {
+        presenter.passCurrentPhotoInfo()
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension DetailViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let visibleCell = detailCollectionView.visibleCells.first,
+              let indexPath = detailCollectionView.indexPath(for: visibleCell) else { return }
+
+        presenter.updateCurrentPosition(section: indexPath.section, index: indexPath.item)
+    }
+}
+
 extension DetailViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return presenter.getSectionCount()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return presenter.getPhotoSectionList(for: section).count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = detailCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: DetailPictureCell.self), for: indexPath) as! DetailPictureCell
 
+        cell.photoItem = presenter.getPhotoSectionList(for: indexPath.section)[indexPath.item]
+
         return cell
+    }
+}
+
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return detailCollectionView.frame.size
     }
 }

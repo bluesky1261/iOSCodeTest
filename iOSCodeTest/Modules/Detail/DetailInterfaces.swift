@@ -17,6 +17,13 @@ protocol DetailViewInterface: ViewInterface {
 }
 
 protocol DetailPresenterInterface: PresenterInterface {
+    func getCurrentPhotoSection() -> Int
+    func getCurrentPhotoIndex() -> Int
+    func getPhotoSectionList(for section: Int) -> [PhotoModel]
+    func getSectionCount() -> Int
+
+    func updateCurrentPosition(section: Int, index: Int)
+    func passCurrentPhotoInfo()
 }
 
 protocol DetailInteractorInterface: InteractorInterface {

@@ -34,12 +34,12 @@ final class MainWireframe: BaseWireframe {
 extension MainWireframe: MainWireframeInterface {
     func navigate(to option: MainNavigationOption) {
         switch option {
-        case .detail(let delegate):
-            showDetail(delegate: delegate)
+        case .detail(let delegate, let section, let index, let photoModels):
+            showDetail(delegate: delegate, section: section, index: index, photoModels: photoModels)
         }
     }
 
-    func showDetail(delegate: DelegatePresenterInterface) {
-        navigationController?.pushWireframe(DetailWireframe(delegate: delegate))
+    func showDetail(delegate: DelegatePresenterInterface, section: Int, index: Int, photoModels: [Int:[PhotoModel]]) {
+        navigationController?.pushWireframe(DetailWireframe(delegate: delegate, section: section, index: index, photoModels: photoModels))
     }
 }

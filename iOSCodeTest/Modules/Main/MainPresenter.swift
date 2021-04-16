@@ -18,6 +18,13 @@ final class MainPresenter {
     private let interactor: MainInteractorInterface
     private let wireframe: MainWireframeInterface
 
+    private var topicSection: Int = 0
+    private var topicSectionList: [Int:[TopicModel]] = .init()
+    private var photoSection: Int = 0
+    private var photoSectionList: [Int:[PhotoModel]] = .init()
+
+    private var isRequestingPhoto: Bool = false
+
     // MARK: - Lifecycle -
 
     init(view: MainViewInterface, interactor: MainInteractorInterface, wireframe: MainWireframeInterface) {
@@ -30,13 +37,88 @@ final class MainPresenter {
 // MARK: - Extensions -
 
 extension MainPresenter: MainPresenterInterface {
-    func moveToDetail() {
-        wireframe.navigate(to: .detail(self))
+    func viewDidLoad() {
+        listTopic()
+        listPhoto()
+    }
+
+    func getTopicSection() -> Int {
+        return topicSection
+    }
+
+    func getTopicSectionList(for section: Int) -> [TopicModel] {
+        return topicSectionList[section] ?? [TopicModel]()
+    }
+
+    func getTopicSectionCount() -> Int {
+        return topicSectionList.count
+    }
+
+    func getPhotoSection() -> Int {
+        return photoSection
+    }
+
+    func getPhotoSectionList(for section: Int) -> [PhotoModel] {
+        return photoSectionList[section] ?? [PhotoModel]()
+    }
+
+    func getPhotoSectionCount() -> Int {
+        return photoSectionList.count
+    }
+
+    func moveToDetail(section: Int, index: Int) {
+        wireframe.navigate(to: .detail(self, section, index, photoSectionList))
+    }
+
+    func requestMorePhoto() {
+        if !isRequestingPhoto {
+            photoSection += 1
+            listPhoto()
+        }
+    }
+}
+
+private extension MainPresenter {
+    func listTopic() {
+        // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
+        interactor.listTopics(page: topicSection + 1) { (topicModel) in
+            self.topicSectionList[self.topicSection] = topicModel
+            self.view.updateTopicList()
+        }
+    }
+
+    func listPhoto() {
+        isRequestingPhoto = true
+        // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
+        interactor.listPhotos(page: photoSection + 1) { (photoModel) in
+            //print("Appending photos at section: \(self.photoSection)")
+            self.photoSectionList[self.photoSection] = photoModel
+
+            DispatchQueue.main.async {
+                self.view.updatePhotoList()
+            }
+
+            self.isRequestingPhoto = false
+        }
     }
 }
 
 extension MainPresenter: DelegatePresenterInterface {
     func passData(sender: PresenterInterface, data: [String : Any]?) {
-    
+        switch sender {
+        case is DetailPresenter:
+            guard let data = data
+                , let section = data["section"] as? Int
+                , let index = data["index"] as? Int
+                , let photoModels = data["photoModels"] as? [Int:[PhotoModel]] else { return }
+
+            photoSectionList = photoModels
+
+            DispatchQueue.main.async {
+                self.view.updatePhotoListWithPosition(currentSection: section, currentIndex: index)
+            }
+        default:
+            print("There is no defined sender.")
+        }
     }
 }

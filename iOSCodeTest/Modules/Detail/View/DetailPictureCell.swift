@@ -8,8 +8,15 @@
 import UIKit
 
 class DetailPictureCell: UICollectionViewCell {
+    private let photoModelService = PhotoModelService.shared
 
     @IBOutlet weak var detailPictureImageView: UIImageView!
+
+    var photoItem: PhotoModel? {
+        didSet {
+            updateCell()
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,4 +33,13 @@ class DetailPictureCell: UICollectionViewCell {
         detailPictureImageView.image = nil
     }
 
+    func updateCell() {
+        if let imageUrl = photoItem?.urls.full {
+            photoModelService.loadPhotoImage(imageUrl: imageUrl) { (image) in
+                guard let image = image else { return }
+
+                self.detailPictureImageView.image = image
+            }
+        }
+    }
 }

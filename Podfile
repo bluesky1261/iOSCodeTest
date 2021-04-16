@@ -7,6 +7,7 @@ target 'iOSCodeTest' do
 
   # Pods for iOSCodeTest
   pod 'Alamofire'
+  pod 'AlamofireImage'
 
   target 'iOSCodeTestTests' do
     inherit! :search_paths

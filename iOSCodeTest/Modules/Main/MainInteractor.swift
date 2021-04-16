@@ -11,9 +11,18 @@
 import Foundation
 
 final class MainInteractor {
+    private let photoModelService = PhotoModelService.shared
+    private let topicModelService = TopicModelService.shared
 }
 
 // MARK: - Extensions -
 
 extension MainInteractor: MainInteractorInterface {
+    func listTopics(page: Int, completion: @escaping TopicListCompletionHandler) {
+        topicModelService.getTopicList(page: page, completion: completion)
+    }
+    
+    func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler) {
+        photoModelService.getPhotoList(page: page, completion: completion)
+    }
 }

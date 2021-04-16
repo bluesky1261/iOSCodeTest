@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		19BC5DDF8CBAE51AB959F4EC /* Pods_iOSCodeTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51437EF63DDC5CA6FBBEB58 /* Pods_iOSCodeTest.framework */; };
 		50B3CA0CDA806254A7413590 /* Pods_iOSCodeTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7FDD258537FC00032FFCD4 /* Pods_iOSCodeTestTests.framework */; };
+		62163F9226291DE100F68086 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163F9126291DE100F68086 /* Server.swift */; };
+		62163F9B26291ECA00F68086 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163F9A26291ECA00F68086 /* PhotoModel.swift */; };
+		62163FA32629210A00F68086 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163FA22629210A00F68086 /* UserModel.swift */; };
+		62163FA826292AE900F68086 /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163FA726292AE900F68086 /* Codable+Extension.swift */; };
+		62163FB126295FA300F68086 /* PhotoModelServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163FB026295FA300F68086 /* PhotoModelServices.swift */; };
+		62163FCF2629707400F68086 /* TopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163FCE2629707400F68086 /* TopicModel.swift */; };
+		62163FD42629711900F68086 /* TopicModelServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163FD32629711900F68086 /* TopicModelServices.swift */; };
 		621A92A4262492DC00FBB68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A92A3262492DC00FBB68B /* AppDelegate.swift */; };
 		621A92A6262492DC00FBB68B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621A92A5262492DC00FBB68B /* SceneDelegate.swift */; };
 		621A92AD262492DC00FBB68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 621A92AC262492DC00FBB68B /* Assets.xcassets */; };
@@ -63,6 +70,13 @@
 /* Begin PBXFileReference section */
 		037CC007B6D59B21E0E72411 /* Pods-iOSCodeTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSCodeTestTests.release.xcconfig"; path = "Target Support Files/Pods-iOSCodeTestTests/Pods-iOSCodeTestTests.release.xcconfig"; sourceTree = "<group>"; };
 		1C7FDD258537FC00032FFCD4 /* Pods_iOSCodeTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSCodeTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62163F9126291DE100F68086 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		62163F9A26291ECA00F68086 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		62163FA22629210A00F68086 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		62163FA726292AE900F68086 /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
+		62163FB026295FA300F68086 /* PhotoModelServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelServices.swift; sourceTree = "<group>"; };
+		62163FCE2629707400F68086 /* TopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicModel.swift; sourceTree = "<group>"; };
+		62163FD32629711900F68086 /* TopicModelServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicModelServices.swift; sourceTree = "<group>"; };
 		621A92A0262492DC00FBB68B /* iOSCodeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSCodeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		621A92A3262492DC00FBB68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		621A92A5262492DC00FBB68B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +151,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62163F9026291DAD00F68086 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				62163F9126291DE100F68086 /* Server.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		62163F9926291EB100F68086 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				62163F9A26291ECA00F68086 /* PhotoModel.swift */,
+				62163FA22629210A00F68086 /* UserModel.swift */,
+				62163FCE2629707400F68086 /* TopicModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		62163FAF26295F8E00F68086 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				62163FB026295FA300F68086 /* PhotoModelServices.swift */,
+				62163FD32629711900F68086 /* TopicModelServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		621A9297262492DC00FBB68B = {
 			isa = PBXGroup;
 			children = (
@@ -214,8 +255,11 @@
 		6237D3C12626D516000A3AF0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				62163F9026291DAD00F68086 /* Constants */,
 				6237D3E32626D668000A3AF0 /* Extensions */,
+				62163F9926291EB100F68086 /* Models */,
 				6237D3C22626D51C000A3AF0 /* Protocols */,
+				62163FAF26295F8E00F68086 /* Services */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -242,6 +286,7 @@
 		6237D3E32626D668000A3AF0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				62163FA726292AE900F68086 /* Codable+Extension.swift */,
 				6237D3E42626D683000A3AF0 /* UIViewController+Extension.swift */,
 				6237D3EC2626D69D000A3AF0 /* UINavigationController+Extension.swift */,
 				6237D3F12626DA50000A3AF0 /* UIStoryboard+Extension.swift */,
@@ -573,17 +618,24 @@
 				6237D3E52626D683000A3AF0 /* UIViewController+Extension.swift in Sources */,
 				6237D3D02626D5B8000A3AF0 /* BaseWireframe.swift in Sources */,
 				62BAB74126272008002903B4 /* MainPictureCell.swift in Sources */,
+				62163F9B26291ECA00F68086 /* PhotoModel.swift in Sources */,
+				62163FCF2629707400F68086 /* TopicModel.swift in Sources */,
 				6237D3B72626D4FC000A3AF0 /* MainPresenter.swift in Sources */,
+				62163FA32629210A00F68086 /* UserModel.swift in Sources */,
 				6237D3B62626D4FC000A3AF0 /* MainInterfaces.swift in Sources */,
 				6237D3D52626D5FF000A3AF0 /* PresenterInterface.swift in Sources */,
+				62163F9226291DE100F68086 /* Server.swift in Sources */,
 				62BAB7AE26273BE1002903B4 /* DetailInteractor.swift in Sources */,
 				6237D3B82626D4FC000A3AF0 /* MainViewController.swift in Sources */,
 				62BAB7AB26273BE1002903B4 /* DetailInterfaces.swift in Sources */,
 				62BAB7AD26273BE1002903B4 /* DetailViewController.swift in Sources */,
 				621A92A4262492DC00FBB68B /* AppDelegate.swift in Sources */,
 				624B47892628271300BC7D82 /* DetailPictureCell.swift in Sources */,
+				62163FB126295FA300F68086 /* PhotoModelServices.swift in Sources */,
 				6237D3BA2626D4FC000A3AF0 /* MainWireframe.swift in Sources */,
+				62163FD42629711900F68086 /* TopicModelServices.swift in Sources */,
 				6237D3B92626D4FC000A3AF0 /* MainInteractor.swift in Sources */,
+				62163FA826292AE900F68086 /* Codable+Extension.swift in Sources */,
 				6237D3ED2626D69D000A3AF0 /* UINavigationController+Extension.swift in Sources */,
 				621A92A6262492DC00FBB68B /* SceneDelegate.swift in Sources */,
 				6237D3DA2626D615000A3AF0 /* ViewInterface.swift in Sources */,
