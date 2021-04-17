@@ -11,12 +11,22 @@
 import UIKit
 
 final class MainViewController: UIViewController {
+    enum ScreenMode {
+        case normal
+        case search
+        //case searchHistory
+    }
 
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var pictureCollectionView: UICollectionView!
+    @IBOutlet weak var searchHistoryView: UIView!
+    @IBOutlet weak var searchHistoryCollectionView: UICollectionView!
+    @IBOutlet weak var searchTextField: UITextField!
     // MARK: - Public properties -
 
     var presenter: MainPresenterInterface!
+
+    private var currentScreenMode: ScreenMode = .normal
 
     // MARK: - Lifecycle -
 
@@ -26,7 +36,9 @@ final class MainViewController: UIViewController {
         presenter.viewDidLoad()
         setupUI()
     }
-
+    @IBAction func clearButtonTouched(_ sender: Any) {
+        presenter.clearSearchHistory()
+    }
 }
 
 // MARK: - Extensions -
@@ -66,12 +78,32 @@ extension MainViewController: MainViewInterface {
         let categoryNib = UINib(nibName: String(describing: MainCategoryCell.self), bundle: categoryBundle)
 
         categoryCollectionView.register(categoryNib, forCellWithReuseIdentifier: String(describing: MainCategoryCell.self))
-        
+
+        let searchHistoryCollectionViewLayout = UICollectionViewFlowLayout()
+
+        searchHistoryCollectionViewLayout.headerReferenceSize = .zero
+        searchHistoryCollectionViewLayout.footerReferenceSize = .zero
+        searchHistoryCollectionViewLayout.scrollDirection = .horizontal
+        searchHistoryCollectionViewLayout.sectionInset = .zero
+
+        searchHistoryCollectionView.setCollectionViewLayout(searchHistoryCollectionViewLayout, animated: false)
+
+        searchHistoryCollectionView.dataSource = self
+        searchHistoryCollectionView.delegate = self
+
+        let searchHistoryBundle = Bundle(for: SearchHistoryCell.self)
+        let searchHistoryNib = UINib(nibName: String(describing: SearchHistoryCell.self), bundle: searchHistoryBundle)
+
+        searchHistoryCollectionView.register(searchHistoryNib, forCellWithReuseIdentifier: String(describing: SearchHistoryCell.self))
+
+        searchTextField.delegate = self
+        searchTextField.clearButtonMode = .whileEditing
     }
 
     func updateTopicList() {
         DispatchQueue.main.async {
             self.categoryCollectionView.reloadData()
+            self.categoryCollectionView.layoutIfNeeded()
         }
     }
 
@@ -85,6 +117,25 @@ extension MainViewController: MainViewInterface {
         self.pictureCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: currentSection), at: .centeredVertically, animated: false)
     }
 
+    func updateSearchHistory() {
+        DispatchQueue.main.async {
+            self.searchHistoryCollectionView.reloadData()
+            self.searchHistoryCollectionView.layoutIfNeeded()
+        }
+    }
+}
+
+private extension MainViewController {
+    func switchScreenMode(to mode: ScreenMode) {
+        switch mode {
+        case .normal:
+            pictureCollectionView.isHidden = false
+            searchHistoryView.isHidden = true
+        case .search:
+            pictureCollectionView.isHidden = true
+            searchHistoryView.isHidden = false
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate {
@@ -103,6 +154,8 @@ extension MainViewController: UICollectionViewDataSource {
             return presenter.getTopicSectionCount()
         } else if collectionView == pictureCollectionView {
             return presenter.getPhotoSectionCount()
+        } else if collectionView == searchHistoryCollectionView {
+            return 1
         } else {
             return 0
         }
@@ -113,6 +166,8 @@ extension MainViewController: UICollectionViewDataSource {
             return presenter.getTopicSectionList(for: section).count
         } else if collectionView == pictureCollectionView {
             return presenter.getPhotoSectionList(for: section).count
+        } else if collectionView == searchHistoryCollectionView {
+            return presenter.getSearchHistory().count
         } else {
             return 0
         }
@@ -131,6 +186,12 @@ extension MainViewController: UICollectionViewDataSource {
             cell.photoItem = presenter.getPhotoSectionList(for: indexPath.section)[indexPath.item]
 
             return cell
+        } else if collectionView == searchHistoryCollectionView {
+            let cell = searchHistoryCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SearchHistoryCell.self), for: indexPath) as! SearchHistoryCell
+
+            cell.searchHistoryItem = presenter.getSearchHistory()[indexPath.item]
+
+            return cell
         } else {
             return UICollectionViewCell()
         }
@@ -142,6 +203,12 @@ extension MainViewController: UICollectionViewDataSource {
         } else if collectionView == pictureCollectionView {
             collectionView.deselectItem(at: indexPath, animated: false)
             presenter.moveToDetail(section: indexPath.section, index: indexPath.item)
+        } else if collectionView == searchHistoryCollectionView {
+            collectionView.deselectItem(at: indexPath, animated: false)
+            searchTextField.resignFirstResponder()
+            
+            presenter.searchPhoto(searchText: presenter.getSearchHistory()[indexPath.item].searchText)
+            switchScreenMode(to: .normal)
         }
     }
 
@@ -153,8 +220,40 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width, height: 200)
         } else if collectionView == categoryCollectionView {
             return CGSize(width: 60, height: 30)
+        } else if collectionView == searchHistoryCollectionView {
+            return CGSize(width: collectionView.frame.width, height: 40)
         } else {
             return .zero
         }
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        presenter.loadSearchHistory()
+        switchScreenMode(to: .search)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let searchText = textField.text, searchText != ""  else {
+            return false
+        }
+
+        textField.resignFirstResponder()
+
+        presenter.saveSearchHistory(searchText: searchText)
+        presenter.searchPhoto(searchText: searchText)
+
+        switchScreenMode(to: .normal)
+
+        return false
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        textField.resignFirstResponder()
+
+        switchScreenMode(to: .normal)
+        return false
     }
 }

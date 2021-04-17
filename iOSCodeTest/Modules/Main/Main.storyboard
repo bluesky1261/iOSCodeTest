@@ -64,6 +64,54 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DvR-Z0-DIO">
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWV-R6-Etk">
+                                        <rect key="frame" x="10" y="10" width="67" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="7ca-dy-HQ1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tvt-Ax-Ynq">
+                                        <rect key="frame" x="331" y="15" width="34" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="asR-kr-9CX"/>
+                                        </constraints>
+                                        <state key="normal" title="clear">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearButtonTouched:" destination="zIc-eW-6fX" eventType="touchUpInside" id="3pi-PL-6Bh"/>
+                                        </connections>
+                                    </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pxe-ew-fun">
+                                        <rect key="frame" x="10" y="30" width="355" height="567"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="9HD-RH-sB5">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="eWV-R6-Etk" firstAttribute="leading" secondItem="DvR-Z0-DIO" secondAttribute="leading" constant="10" id="6l8-vu-Y4b"/>
+                                    <constraint firstItem="Pxe-ew-fun" firstAttribute="leading" secondItem="DvR-Z0-DIO" secondAttribute="leading" constant="10" id="Bh8-6M-RgF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pxe-ew-fun" secondAttribute="bottom" id="MTQ-T8-KPy"/>
+                                    <constraint firstItem="eWV-R6-Etk" firstAttribute="top" secondItem="DvR-Z0-DIO" secondAttribute="top" constant="10" id="YC6-S8-5mF"/>
+                                    <constraint firstItem="Pxe-ew-fun" firstAttribute="top" secondItem="eWV-R6-Etk" secondAttribute="bottom" id="ZHN-Qq-0ts"/>
+                                    <constraint firstItem="Tvt-Ax-Ynq" firstAttribute="bottom" secondItem="eWV-R6-Etk" secondAttribute="bottom" id="bBy-Xk-OHL"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pxe-ew-fun" secondAttribute="trailing" constant="10" id="rfa-mt-NBE"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tvt-Ax-Ynq" secondAttribute="trailing" constant="10" id="uhY-LP-4EH"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4CD-Du-UGB">
                                 <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -83,17 +131,24 @@
                             <constraint firstItem="jOn-Rq-tSI" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="6ez-mo-IIJ"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="NxR-ye-qPU" secondAttribute="trailing" constant="20" id="6yk-i6-bgA"/>
                             <constraint firstItem="NxR-ye-qPU" firstAttribute="top" secondItem="jOn-Rq-tSI" secondAttribute="bottom" id="8mN-yN-S91"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="DvR-Z0-DIO" secondAttribute="trailing" id="DMf-mX-Nld"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="4CD-Du-UGB" secondAttribute="trailing" id="E0k-mO-KrN"/>
+                            <constraint firstItem="3pi-N7-nbV" firstAttribute="bottom" secondItem="DvR-Z0-DIO" secondAttribute="bottom" id="FPn-Ni-eTq"/>
                             <constraint firstItem="4CD-Du-UGB" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="GMO-K4-gjp"/>
+                            <constraint firstItem="DvR-Z0-DIO" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" id="R3d-Xt-bjD"/>
                             <constraint firstItem="4CD-Du-UGB" firstAttribute="top" secondItem="NxR-ye-qPU" secondAttribute="bottom" id="ZBW-ac-AUI"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="bottom" secondItem="4CD-Du-UGB" secondAttribute="bottom" id="l7N-JM-bqY"/>
                             <constraint firstItem="3pi-N7-nbV" firstAttribute="trailing" secondItem="jOn-Rq-tSI" secondAttribute="trailing" id="lod-Vw-MIH"/>
+                            <constraint firstItem="DvR-Z0-DIO" firstAttribute="top" secondItem="NxR-ye-qPU" secondAttribute="bottom" id="sai-aq-RrR"/>
                             <constraint firstItem="NxR-ye-qPU" firstAttribute="leading" secondItem="3pi-N7-nbV" secondAttribute="leading" constant="20" id="wgq-y9-dod"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="categoryCollectionView" destination="jOn-Rq-tSI" id="BI5-ff-MLj"/>
                         <outlet property="pictureCollectionView" destination="4CD-Du-UGB" id="3Rp-Ru-jSs"/>
+                        <outlet property="searchHistoryCollectionView" destination="Pxe-ew-fun" id="x86-Oh-ofI"/>
+                        <outlet property="searchHistoryView" destination="DvR-Z0-DIO" id="ZfG-3c-Hts"/>
+                        <outlet property="searchTextField" destination="QO5-N8-wwD" id="QwS-Jq-h4Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rle-ol-2Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>

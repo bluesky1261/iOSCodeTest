@@ -30,3 +30,9 @@ struct PhotoUrlModel: Codable {
     let small: String?
     let thumb: String?
 }
+
+struct PhotoSearchResultModel: Codable {
+    let total: UInt32
+    let total_pages: UInt32
+    let results: [PhotoModel]
+}

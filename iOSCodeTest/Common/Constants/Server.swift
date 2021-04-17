@@ -12,4 +12,5 @@ struct Server {
 
     static let LIST_PHOTO_URL = "https://api.unsplash.com/photos"
     static let LIST_TOPIC_URL = "https://api.unsplash.com/topics"
+    static let SEARCH_PHOTO_URL = "https://api.unsplash.com/search/photos"
 }

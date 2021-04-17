@@ -13,6 +13,7 @@ import Foundation
 final class MainInteractor {
     private let photoModelService = PhotoModelService.shared
     private let topicModelService = TopicModelService.shared
+    private let searchHistoryService = SearchHistoryService.shared
 }
 
 // MARK: - Extensions -
@@ -24,5 +25,21 @@ extension MainInteractor: MainInteractorInterface {
     
     func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler) {
         photoModelService.getPhotoList(page: page, completion: completion)
+    }
+
+    func saveSearchHistory(searchText: String) {
+        searchHistoryService.saveSearchHistory(keyword: searchText)
+    }
+
+    func loadSearchHistory() -> [SearchHistoryModel] {
+        return searchHistoryService.loadSearchHistory()
+    }
+
+    func clearSearchHistory() {
+        searchHistoryService.clearSearchHistory()
+    }
+
+    func searchPhoto(page: Int, searchText: String, completion: @escaping PhotoListCompletionHandler) {
+        photoModelService.searchPhoto(page: page, searchText: searchText, completion: completion)
     }
 }
