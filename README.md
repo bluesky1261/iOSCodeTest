@@ -2,7 +2,11 @@
 코드 테스트
 
 ## Project Description
+* Unsplash 메인 / 검색 화면 구현
 * Viper Architecture를 채택하여 구현
+
+### 추가 구현 기능
+* 검색어 History 기능
 
 ## References
 ### 사용 Library

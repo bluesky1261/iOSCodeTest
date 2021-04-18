@@ -22,7 +22,6 @@ protocol MainViewInterface: ViewInterface {
     func updateTopicList()
     func updatePhotoList()
     func updatePhotoListWithPosition(currentSection: Int, currentIndex: Int)
-    func updateSearchHistory()
 }
 
 protocol MainPresenterInterface: PresenterInterface {
@@ -32,22 +31,12 @@ protocol MainPresenterInterface: PresenterInterface {
     func getPhotoSection() -> Int
     func getPhotoSectionList(for section: Int) -> [PhotoModel]
     func getPhotoSectionCount() -> Int
-    func getSearchHistory() -> [SearchHistoryModel]
     
     func moveToDetail(section: Int, index: Int)
     func requestMorePhoto()
-    func saveSearchHistory(searchText: String)
-    func loadSearchHistory()
-    func clearSearchHistory()
-    
-    func searchPhoto(searchText: String)
 }
 
 protocol MainInteractorInterface: InteractorInterface {
     func listTopics(page: Int, completion: @escaping TopicListCompletionHandler)
     func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler)
-    func saveSearchHistory(searchText: String)
-    func loadSearchHistory() -> [SearchHistoryModel]
-    func clearSearchHistory()
-    func searchPhoto(page: Int, searchText: String, completion: @escaping PhotoListCompletionHandler)
 }

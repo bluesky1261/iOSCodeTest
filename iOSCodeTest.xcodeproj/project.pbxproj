@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		19BC5DDF8CBAE51AB959F4EC /* Pods_iOSCodeTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51437EF63DDC5CA6FBBEB58 /* Pods_iOSCodeTest.framework */; };
 		50B3CA0CDA806254A7413590 /* Pods_iOSCodeTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7FDD258537FC00032FFCD4 /* Pods_iOSCodeTestTests.framework */; };
+		62017DC6262A65390043B9E4 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62017DC0262A65390043B9E4 /* Search.storyboard */; };
+		62017DC7262A65390043B9E4 /* SearchInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DC1262A65390043B9E4 /* SearchInterfaces.swift */; };
+		62017DC8262A65390043B9E4 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DC2262A65390043B9E4 /* SearchPresenter.swift */; };
+		62017DC9262A65390043B9E4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DC3262A65390043B9E4 /* SearchViewController.swift */; };
+		62017DCA262A65390043B9E4 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DC4262A65390043B9E4 /* SearchInteractor.swift */; };
+		62017DCB262A65390043B9E4 /* SearchWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DC5262A65390043B9E4 /* SearchWireframe.swift */; };
+		62017DE8262A689B0043B9E4 /* MainTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62017DE2262A689B0043B9E4 /* MainTab.storyboard */; };
+		62017DE9262A689B0043B9E4 /* MainTabInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DE3262A689B0043B9E4 /* MainTabInterfaces.swift */; };
+		62017DEA262A689B0043B9E4 /* MainTabPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DE4262A689B0043B9E4 /* MainTabPresenter.swift */; };
+		62017DEB262A689B0043B9E4 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DE5262A689B0043B9E4 /* MainTabViewController.swift */; };
+		62017DEC262A689B0043B9E4 /* MainTabInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DE6262A689B0043B9E4 /* MainTabInteractor.swift */; };
+		62017DED262A689B0043B9E4 /* MainTabWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62017DE7262A689B0043B9E4 /* MainTabWireframe.swift */; };
 		62163F9226291DE100F68086 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163F9126291DE100F68086 /* Server.swift */; };
 		62163F9B26291ECA00F68086 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163F9A26291ECA00F68086 /* PhotoModel.swift */; };
 		62163FA32629210A00F68086 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62163FA22629210A00F68086 /* UserModel.swift */; };
@@ -75,6 +87,18 @@
 /* Begin PBXFileReference section */
 		037CC007B6D59B21E0E72411 /* Pods-iOSCodeTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSCodeTestTests.release.xcconfig"; path = "Target Support Files/Pods-iOSCodeTestTests/Pods-iOSCodeTestTests.release.xcconfig"; sourceTree = "<group>"; };
 		1C7FDD258537FC00032FFCD4 /* Pods_iOSCodeTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSCodeTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62017DC0262A65390043B9E4 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		62017DC1262A65390043B9E4 /* SearchInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInterfaces.swift; sourceTree = "<group>"; };
+		62017DC2262A65390043B9E4 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		62017DC3262A65390043B9E4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		62017DC4262A65390043B9E4 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		62017DC5262A65390043B9E4 /* SearchWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWireframe.swift; sourceTree = "<group>"; };
+		62017DE2262A689B0043B9E4 /* MainTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainTab.storyboard; sourceTree = "<group>"; };
+		62017DE3262A689B0043B9E4 /* MainTabInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabInterfaces.swift; sourceTree = "<group>"; };
+		62017DE4262A689B0043B9E4 /* MainTabPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabPresenter.swift; sourceTree = "<group>"; };
+		62017DE5262A689B0043B9E4 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		62017DE6262A689B0043B9E4 /* MainTabInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabInteractor.swift; sourceTree = "<group>"; };
+		62017DE7262A689B0043B9E4 /* MainTabWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabWireframe.swift; sourceTree = "<group>"; };
 		62163F9126291DE100F68086 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		62163F9A26291ECA00F68086 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		62163FA22629210A00F68086 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -161,6 +185,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62017DBF262A651D0043B9E4 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				62017DC0262A65390043B9E4 /* Search.storyboard */,
+				62017DC1262A65390043B9E4 /* SearchInterfaces.swift */,
+				62017DC2262A65390043B9E4 /* SearchPresenter.swift */,
+				62017DC3262A65390043B9E4 /* SearchViewController.swift */,
+				62017DC4262A65390043B9E4 /* SearchInteractor.swift */,
+				62017DC5262A65390043B9E4 /* SearchWireframe.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		62017DE1262A68690043B9E4 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				62017DE2262A689B0043B9E4 /* MainTab.storyboard */,
+				62017DE3262A689B0043B9E4 /* MainTabInterfaces.swift */,
+				62017DE4262A689B0043B9E4 /* MainTabPresenter.swift */,
+				62017DE5262A689B0043B9E4 /* MainTabViewController.swift */,
+				62017DE6262A689B0043B9E4 /* MainTabInteractor.swift */,
+				62017DE7262A689B0043B9E4 /* MainTabWireframe.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
 		62163F9026291DAD00F68086 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,8 +295,10 @@
 		6237D3972626D31F000A3AF0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				62017DE1262A68690043B9E4 /* MainTab */,
 				62BAB7A326273BC7002903B4 /* Detail */,
 				6237D3AE2626D4EB000A3AF0 /* Main */,
+				62017DBF262A651D0043B9E4 /* Search */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -494,9 +546,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				621A92B0262492DC00FBB68B /* LaunchScreen.storyboard in Resources */,
+				62017DE8262A689B0043B9E4 /* MainTab.storyboard in Resources */,
 				62BAB74226272008002903B4 /* MainPictureCell.xib in Resources */,
 				621A92AD262492DC00FBB68B /* Assets.xcassets in Resources */,
 				62BAB7AA26273BE1002903B4 /* Detail.storyboard in Resources */,
+				62017DC6262A65390043B9E4 /* Search.storyboard in Resources */,
 				6237D3B52626D4FC000A3AF0 /* Main.storyboard in Resources */,
 				624B47A02628365100BC7D82 /* MainCategoryCell.xib in Resources */,
 				62163FE52629D3F500F68086 /* SearchHistoryCell.xib in Resources */,
@@ -629,6 +683,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6237D3DF2626D623000A3AF0 /* InteractorInterface.swift in Sources */,
+				62017DCA262A65390043B9E4 /* SearchInteractor.swift in Sources */,
+				62017DC7262A65390043B9E4 /* SearchInterfaces.swift in Sources */,
 				62BAB7AF26273BE1002903B4 /* DetailWireframe.swift in Sources */,
 				624B479F2628365100BC7D82 /* MainCategoryCell.swift in Sources */,
 				6237D3E52626D683000A3AF0 /* UIViewController+Extension.swift in Sources */,
@@ -640,22 +696,30 @@
 				62163FD92629CF5300F68086 /* SearchHistoryService.swift in Sources */,
 				6237D3B72626D4FC000A3AF0 /* MainPresenter.swift in Sources */,
 				62163FA32629210A00F68086 /* UserModel.swift in Sources */,
+				62017DE9262A689B0043B9E4 /* MainTabInterfaces.swift in Sources */,
 				6237D3B62626D4FC000A3AF0 /* MainInterfaces.swift in Sources */,
 				6237D3D52626D5FF000A3AF0 /* PresenterInterface.swift in Sources */,
+				62017DEC262A689B0043B9E4 /* MainTabInteractor.swift in Sources */,
 				62163FDE2629CF9100F68086 /* SearchHistoryModel.swift in Sources */,
 				62163F9226291DE100F68086 /* Server.swift in Sources */,
+				62017DCB262A65390043B9E4 /* SearchWireframe.swift in Sources */,
 				62BAB7AE26273BE1002903B4 /* DetailInteractor.swift in Sources */,
+				62017DEB262A689B0043B9E4 /* MainTabViewController.swift in Sources */,
+				62017DEA262A689B0043B9E4 /* MainTabPresenter.swift in Sources */,
 				6237D3B82626D4FC000A3AF0 /* MainViewController.swift in Sources */,
 				62BAB7AB26273BE1002903B4 /* DetailInterfaces.swift in Sources */,
 				62BAB7AD26273BE1002903B4 /* DetailViewController.swift in Sources */,
 				621A92A4262492DC00FBB68B /* AppDelegate.swift in Sources */,
 				624B47892628271300BC7D82 /* DetailPictureCell.swift in Sources */,
 				62163FB126295FA300F68086 /* PhotoModelServices.swift in Sources */,
+				62017DED262A689B0043B9E4 /* MainTabWireframe.swift in Sources */,
 				6237D3BA2626D4FC000A3AF0 /* MainWireframe.swift in Sources */,
 				62163FD42629711900F68086 /* TopicModelServices.swift in Sources */,
 				6237D3B92626D4FC000A3AF0 /* MainInteractor.swift in Sources */,
+				62017DC8262A65390043B9E4 /* SearchPresenter.swift in Sources */,
 				62163FA826292AE900F68086 /* Codable+Extension.swift in Sources */,
 				62163FE42629D3F500F68086 /* SearchHistoryCell.swift in Sources */,
+				62017DC9262A65390043B9E4 /* SearchViewController.swift in Sources */,
 				6237D3ED2626D69D000A3AF0 /* UINavigationController+Extension.swift in Sources */,
 				621A92A6262492DC00FBB68B /* SceneDelegate.swift in Sources */,
 				6237D3DA2626D615000A3AF0 /* ViewInterface.swift in Sources */,

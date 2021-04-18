@@ -21,9 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        // 최초 화면은 MainWireframe이 Root인 Navigation Controller
-        let navigationController = UINavigationController(rootViewController: MainWireframe().viewController)
-        window?.rootViewController = navigationController
+
+        // 최초 화면은 MainTabWireframe (UITabBarController)
+        let tabBarController = MainTabWireframe().viewController
+
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 

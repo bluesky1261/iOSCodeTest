@@ -22,8 +22,6 @@ final class MainPresenter {
     private var topicSectionList: [Int:[TopicModel]] = .init()
     private var photoSection: Int = 0
     private var photoSectionList: [Int:[PhotoModel]] = .init()
-    private var searchSection: Int = 0
-    private var searchHistory: [SearchHistoryModel] = .init()
 
     private var isRequestingPhoto: Bool = false
 
@@ -42,7 +40,6 @@ extension MainPresenter: MainPresenterInterface {
     func viewDidLoad() {
         listTopic()
         listPhoto()
-        loadSearchHistory()
     }
 
     func getTopicSection() -> Int {
@@ -69,10 +66,6 @@ extension MainPresenter: MainPresenterInterface {
         return photoSectionList.count
     }
 
-    func getSearchHistory() -> [SearchHistoryModel] {
-        return searchHistory
-    }
-
     func moveToDetail(section: Int, index: Int) {
         wireframe.navigate(to: .detail(self, section, index, photoSectionList))
     }
@@ -81,33 +74,6 @@ extension MainPresenter: MainPresenterInterface {
         if !isRequestingPhoto {
             photoSection += 1
             listPhoto()
-        }
-    }
-
-    func saveSearchHistory(searchText: String) {
-        interactor.saveSearchHistory(searchText: searchText)
-    }
-
-    func loadSearchHistory() {
-        searchHistory = interactor.loadSearchHistory()
-        self.view.updateSearchHistory()
-    }
-
-    func clearSearchHistory() {
-        interactor.clearSearchHistory()
-        searchHistory = .init()
-        self.view.updateSearchHistory()
-    }
-
-    // TODO: SearchPhoto 부분이 Photo List와 겹치지 않도록 개선 필요
-    func searchPhoto(searchText: String) {
-        interactor.searchPhoto(page: searchSection + 1, searchText: searchText) { (photoModel) in
-            self.photoSectionList = .init()
-            self.photoSectionList[self.searchSection] = photoModel
-
-            DispatchQueue.main.async {
-                self.view.updatePhotoList()
-            }
         }
     }
 }
