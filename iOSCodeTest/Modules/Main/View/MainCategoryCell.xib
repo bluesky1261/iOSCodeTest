@@ -17,11 +17,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gF2-9o-FBh">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gF2-9o-FBh">
                         <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmQ-fu-NaI">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="29"/>
+                                <rect key="frame" x="0.0" y="1" width="60" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,12 +38,12 @@
                         <constraints>
                             <constraint firstItem="won-qc-8zK" firstAttribute="trailing" secondItem="wmQ-fu-NaI" secondAttribute="trailing" id="5Cd-lA-baU"/>
                             <constraint firstItem="won-qc-8zK" firstAttribute="top" secondItem="wmQ-fu-NaI" secondAttribute="bottom" id="6z5-Vn-RRg"/>
-                            <constraint firstItem="wmQ-fu-NaI" firstAttribute="top" secondItem="gF2-9o-FBh" secondAttribute="top" id="DnZ-3g-cfE"/>
                             <constraint firstItem="won-qc-8zK" firstAttribute="leading" secondItem="wmQ-fu-NaI" secondAttribute="leading" id="TlX-xj-yap"/>
                             <constraint firstItem="wmQ-fu-NaI" firstAttribute="leading" secondItem="gF2-9o-FBh" secondAttribute="leading" id="UW0-mj-iB9"/>
                             <constraint firstAttribute="height" constant="30" id="VzN-5I-e6D"/>
                             <constraint firstAttribute="bottom" secondItem="won-qc-8zK" secondAttribute="bottom" id="cEn-qR-yYn"/>
                             <constraint firstAttribute="trailing" secondItem="wmQ-fu-NaI" secondAttribute="trailing" id="d5D-yV-qRl"/>
+                            <constraint firstItem="wmQ-fu-NaI" firstAttribute="centerY" secondItem="gF2-9o-FBh" secondAttribute="centerY" id="gZf-ii-Til"/>
                         </constraints>
                     </view>
                 </subviews>

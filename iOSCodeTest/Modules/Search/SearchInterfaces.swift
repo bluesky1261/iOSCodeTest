@@ -21,6 +21,7 @@ protocol SearchWireframeInterface: WireframeInterface {
 protocol SearchViewInterface: ViewInterface {
     func updateSearchHistory()
     func updateSearchList()
+    func updateSearchList(section: Int)
     func updateSearchListWithPosition(currentSection: Int, currentIndex: Int)
 }
 

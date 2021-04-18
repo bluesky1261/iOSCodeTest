@@ -39,8 +39,10 @@ extension MainViewController: MainViewInterface {
         pictureCollectionViewLayout.footerReferenceSize = .zero
         pictureCollectionViewLayout.scrollDirection = .vertical
         pictureCollectionViewLayout.sectionInset = .zero
+        pictureCollectionViewLayout.minimumLineSpacing = .zero
 
         pictureCollectionView.setCollectionViewLayout(pictureCollectionViewLayout, animated: false)
+        pictureCollectionView.decelerationRate = .fast
 
         pictureCollectionView.dataSource = self
         pictureCollectionView.delegate = self
@@ -58,6 +60,7 @@ extension MainViewController: MainViewInterface {
         categoryCollectionViewLayout.sectionInset = .zero
 
         categoryCollectionView.setCollectionViewLayout(categoryCollectionViewLayout, animated: false)
+        categoryCollectionView.showsHorizontalScrollIndicator = false
 
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
@@ -77,6 +80,11 @@ extension MainViewController: MainViewInterface {
 
     func updatePhotoList() {
         self.pictureCollectionView.reloadData()
+        self.pictureCollectionView.layoutIfNeeded()
+    }
+
+    func updatePhotoList(section: Int) {
+        self.pictureCollectionView.insertSections(IndexSet(integer: section))
         self.pictureCollectionView.layoutIfNeeded()
     }
 
@@ -149,9 +157,20 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == pictureCollectionView {
-            return CGSize(width: collectionView.frame.width, height: 200)
+            let photoItem = presenter.getPhotoSectionList(for: indexPath.section)[indexPath.item]
+
+            let collectionViewWidth = collectionView.frame.width
+            let photoWidth = CGFloat(photoItem.width)
+            let photoHeight = CGFloat(photoItem.height)
+
+            let calculatedHeight = ceil(photoHeight * collectionViewWidth / photoWidth)
+
+            return CGSize(width: collectionViewWidth, height: calculatedHeight)
         } else if collectionView == categoryCollectionView {
-            return CGSize(width: 60, height: 30)
+            let topicItem = presenter.getTopicSectionList(for: indexPath.section)[indexPath.item]
+            let titleString = NSString(string: topicItem.title)
+            
+            return CGSize(width: titleString.size(withAttributes: nil).width + 10, height: categoryCollectionView.bounds.height)
         } else {
             return .zero
         }

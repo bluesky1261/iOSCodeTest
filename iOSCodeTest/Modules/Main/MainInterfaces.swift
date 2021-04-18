@@ -21,6 +21,7 @@ protocol MainWireframeInterface: WireframeInterface {
 protocol MainViewInterface: ViewInterface {
     func updateTopicList()
     func updatePhotoList()
+    func updatePhotoList(section: Int)
     func updatePhotoListWithPosition(currentSection: Int, currentIndex: Int)
 }
 

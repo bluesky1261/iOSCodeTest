@@ -63,13 +63,14 @@ extension SearchPresenter: SearchPresenterInterface {
         isRequestingPhoto = true
         // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
         interactor.searchPhoto(page: searchSection + 1, searchText: searchText) { (photoModel) in
+            guard let photoModel = photoModel else { return }
+
             self.searchSectionList[self.searchSection] = photoModel
 
             DispatchQueue.main.async {
-                self.view.updateSearchList()
+                self.view.updateSearchList(section: self.searchSection)
+                self.isRequestingPhoto = false
             }
-            
-            self.isRequestingPhoto = false
         }
     }
 

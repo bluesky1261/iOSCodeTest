@@ -68,8 +68,10 @@ extension SearchViewController: SearchViewInterface {
         searchResultCollectionViewLayout.footerReferenceSize = .zero
         searchResultCollectionViewLayout.scrollDirection = .vertical
         searchResultCollectionViewLayout.sectionInset = .zero
+        searchResultCollectionViewLayout.minimumLineSpacing = .zero
 
         searchResultCollectionView.setCollectionViewLayout(searchResultCollectionViewLayout, animated: false)
+        searchResultCollectionView.decelerationRate = .fast
 
         searchResultCollectionView.dataSource = self
         searchResultCollectionView.delegate = self
@@ -94,6 +96,12 @@ extension SearchViewController: SearchViewInterface {
         self.searchResultCollectionView.reloadData()
         self.searchResultCollectionView.layoutIfNeeded()
     }
+
+    func updateSearchList(section: Int) {
+        self.searchResultCollectionView.insertSections(IndexSet(integer: section))
+        self.searchResultCollectionView.layoutIfNeeded()
+    }
+
 
     func updateSearchListWithPosition(currentSection: Int, currentIndex: Int) {
         updateSearchList()
@@ -185,7 +193,15 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == searchResultCollectionView {
-            return CGSize(width: collectionView.frame.width, height: 200)
+            let photoItem = presenter.getSearchSectionList(for: indexPath.section)[indexPath.item]
+
+            let collectionViewWidth = collectionView.frame.width
+            let photoWidth = CGFloat(photoItem.width)
+            let photoHeight = CGFloat(photoItem.height)
+
+            let calculatedHeight = ceil(photoHeight * collectionViewWidth / photoWidth)
+
+            return CGSize(width: collectionViewWidth, height: calculatedHeight)
         } else if collectionView == searchHistoryCollectionView {
             return CGSize(width: collectionView.frame.width, height: 40)
         } else {

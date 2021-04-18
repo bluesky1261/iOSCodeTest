@@ -39,11 +39,15 @@ class MainPictureCell: UICollectionViewCell {
     }
 
     func updateCell() {
-        if let imageUrl = photoItem?.urls.regular {
-            photoModelService.loadPhotoImage(imageUrl: imageUrl) { (image) in
-                guard let image = image else { return }
-
+        if let imageUrl = photoItem?.urls.raw {
+            if let image = photoModelService.imageCache.image(withIdentifier: imageUrl) {
                 self.pictureImageView.image = image
+            } else {
+                photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: UIScreen.main.bounds.size) { (image) in
+                    guard let image = image else { return }
+
+                    self.pictureImageView.image = image
+                }
             }
         }
 

@@ -15,6 +15,9 @@ typealias PhotoImageCompletionHandler = (Image?) -> Void
 class PhotoModelService {
     static let shared = PhotoModelService()
 
+    // Cache
+    let imageCache = AutoPurgingImageCache(memoryCapacity: 256_000_000, preferredMemoryUsageAfterPurge: 128_000)
+
     private init() { }
 }
 
@@ -39,10 +42,19 @@ extension PhotoModelService {
         }
     }
 
-    func loadPhotoImage(imageUrl: String, completion: @escaping PhotoImageCompletionHandler) {
-        AF.request(imageUrl).responseImage { (response) in
+    func loadPhotoImage(imageUrl: String, frameSize: CGSize, completion: @escaping PhotoImageCompletionHandler) {
+        let devicePixelRatio = Int(UIScreen.main.scale)
+        let parameters: [String: String] = ["w": "\(Int(frameSize.width))"
+                                            , "dpr": "\(devicePixelRatio)"
+                                            , "fm": "jpg"
+                                            , "fit": "max"
+                                            , "q": "80"]
+
+        AF.request(imageUrl, parameters: parameters).responseImage { (response) in
             switch response.result {
             case .success(let image):
+
+                self.imageCache.add(image, withIdentifier: imageUrl)
                 completion(image)
             case .failure(let error):
                 completion(nil)

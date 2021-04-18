@@ -34,11 +34,15 @@ class DetailPictureCell: UICollectionViewCell {
     }
 
     func updateCell() {
-        if let imageUrl = photoItem?.urls.full {
-            photoModelService.loadPhotoImage(imageUrl: imageUrl) { (image) in
-                guard let image = image else { return }
-
+        if let imageUrl = photoItem?.urls.raw {
+            if let image = photoModelService.imageCache.image(withIdentifier: imageUrl) {
                 self.detailPictureImageView.image = image
+            } else {
+                photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: detailPictureImageView.bounds.size) { (image) in
+                    guard let image = image else { return }
+
+                    self.detailPictureImageView.image = image
+                }
             }
         }
     }

@@ -52,6 +52,8 @@ extension DetailViewController: DetailViewInterface {
         detailCollectionView.setCollectionViewLayout(detailCollectionViewLayout, animated: false)
         detailCollectionView.isPagingEnabled = true
         detailCollectionView.alwaysBounceHorizontal = true
+        detailCollectionView.showsHorizontalScrollIndicator = false
+
 
         detailCollectionView.delegate = self
         detailCollectionView.dataSource = self

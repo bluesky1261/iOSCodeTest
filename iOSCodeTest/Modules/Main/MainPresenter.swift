@@ -91,14 +91,14 @@ private extension MainPresenter {
         isRequestingPhoto = true
         // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
         interactor.listPhotos(page: photoSection + 1) { (photoModel) in
-            //print("Appending photos at section: \(self.photoSection)")
+            guard let photoModel = photoModel else { return }
+            
             self.photoSectionList[self.photoSection] = photoModel
 
             DispatchQueue.main.async {
-                self.view.updatePhotoList()
+                self.view.updatePhotoList(section: self.photoSection)
+                self.isRequestingPhoto = false
             }
-
-            self.isRequestingPhoto = false
         }
     }
 }
