@@ -24,10 +24,6 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
-
-        detailCollectionView.reloadData()
-        detailCollectionView.layoutIfNeeded()
-        detailCollectionView.scrollToItem(at: IndexPath(item: presenter.getCurrentPhotoIndex(), section: presenter.getCurrentPhotoSection()), at: .centeredHorizontally, animated: false)
     }
 }
 
@@ -62,6 +58,36 @@ extension DetailViewController: DetailViewInterface {
         let nib = UINib(nibName: String(describing: DetailPictureCell.self), bundle: bundle)
 
         detailCollectionView.register(nib, forCellWithReuseIdentifier: String(describing: DetailPictureCell.self))
+
+        let currentPhotoSection = presenter.getCurrentPhotoSection()
+        let currentPhotoIndex = presenter.getCurrentPhotoIndex()
+        let currentPhotoItem = presenter.getPhotoSectionList(for: currentPhotoSection)[currentPhotoIndex]
+
+        // Navigation Bar Title 작업
+        let navLabel = UILabel()
+        let navTitle = NSMutableAttributedString(string: currentPhotoItem.user.name, attributes:[
+                                                    NSAttributedString.Key.foregroundColor: UIColor.black,
+                                                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15.0)])
+
+        if let sponsorName = currentPhotoItem.sponsorship?.sponsor.name {
+            navLabel.numberOfLines += 1
+            if sponsorName == currentPhotoItem.user.name {
+                navTitle.append(NSMutableAttributedString(string: "\nSponsored", attributes:[
+                                                            NSAttributedString.Key.foregroundColor: UIColor.gray,
+                                                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)]))
+            } else {
+                navTitle.append(NSMutableAttributedString(string: "\nSponsored by \(sponsorName)", attributes:[
+                                                            NSAttributedString.Key.foregroundColor: UIColor.gray,
+                                                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)]))
+            }
+        }
+        navLabel.textAlignment = .center
+        navLabel.attributedText = navTitle
+        self.navigationItem.titleView = navLabel
+
+        detailCollectionView.reloadData()
+        detailCollectionView.layoutIfNeeded()
+        detailCollectionView.scrollToItem(at: IndexPath(item: currentPhotoIndex, section: currentPhotoSection), at: .centeredHorizontally, animated: false)
     }
 }
 

@@ -51,7 +51,14 @@ class MainPictureCell: UICollectionViewCell {
             }
         }
 
-        pictureNameLabel.text = photoItem?.user.username
-        sponsorNameLabel.text = photoItem?.sponsorship?.sponsor.username
+        pictureNameLabel.text = photoItem?.user.name
+
+        if let sponsorName = photoItem?.sponsorship?.sponsor.name, let name = photoItem?.user.name {
+            if sponsorName == name {
+                sponsorNameLabel.text = "Sponsored"
+            } else {
+                sponsorNameLabel.text = "Sponsored by \(sponsorName)"
+            }
+        }
     }
 }
