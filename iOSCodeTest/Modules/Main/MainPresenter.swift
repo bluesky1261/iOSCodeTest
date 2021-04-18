@@ -23,6 +23,7 @@ final class MainPresenter {
     private var photoSection: Int = 0
     private var photoSectionList: [Int:[PhotoModel]] = .init()
 
+    private var currentTopicIndex: Int = 0
     private var isRequestingPhoto: Bool = false
 
     // MARK: - Lifecycle -
@@ -39,7 +40,6 @@ final class MainPresenter {
 extension MainPresenter: MainPresenterInterface {
     func viewDidLoad() {
         listTopic()
-        listPhoto()
     }
 
     func getTopicSection() -> Int {
@@ -66,14 +66,52 @@ extension MainPresenter: MainPresenterInterface {
         return photoSectionList.count
     }
 
+    func getCurrentTopicIndex() -> Int {
+        return currentTopicIndex
+    }
+
+    func updateCurrentTopicIndex(index: Int) {
+        guard var topicModel = self.topicSectionList[0] else { return }
+        topicModel[currentTopicIndex].topicSelected = false
+        topicModel[index].topicSelected = true
+
+        currentTopicIndex = index
+
+        photoSection = 0
+        photoSectionList = .init()
+
+        listPhoto(topicId: topicModel[currentTopicIndex].id) { (photoModel) in
+            guard let photoModel = photoModel else { return }
+
+            self.photoSectionList[self.photoSection] = photoModel
+
+            DispatchQueue.main.async {
+                self.view.updateTopicList()
+                self.view.updatePhotoListWithPosition(currentSection: 0, currentIndex: 0)
+                self.isRequestingPhoto = false
+            }
+        }
+    }
+
     func moveToDetail(section: Int, index: Int) {
         wireframe.navigate(to: .detail(self, section, index, photoSectionList))
     }
 
     func requestMorePhoto() {
+        guard let topicModel = self.topicSectionList[0] else { return }
+
         if !isRequestingPhoto {
             photoSection += 1
-            listPhoto()
+            listPhoto(topicId: topicModel[currentTopicIndex].id) { (photoModel) in
+                guard let photoModel = photoModel else { return }
+
+                self.photoSectionList[self.photoSection] = photoModel
+
+                DispatchQueue.main.async {
+                    self.view.updatePhotoList(section: self.photoSection)
+                    self.isRequestingPhoto = false
+                }
+            }
         }
     }
 }
@@ -82,24 +120,30 @@ private extension MainPresenter {
     func listTopic() {
         // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
         interactor.listTopics(page: topicSection + 1) { (topicModel) in
+            guard var topicModel = topicModel else { return }
+
+            topicModel[self.currentTopicIndex].topicSelected = true
             self.topicSectionList[self.topicSection] = topicModel
             self.view.updateTopicList()
+
+            // 최초 Photo List 조회
+            self.listPhoto(topicId: topicModel[self.currentTopicIndex].id) { (photoModel) in
+                guard let photoModel = photoModel else { return }
+
+                self.photoSectionList[self.photoSection] = photoModel
+
+                DispatchQueue.main.async {
+                    self.view.updatePhotoList()
+                    self.isRequestingPhoto = false
+                }
+            }
         }
     }
 
-    func listPhoto() {
+    func listPhoto(topicId: String?, completion: @escaping PhotoListCompletionHandler) {
         isRequestingPhoto = true
         // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
-        interactor.listPhotos(page: photoSection + 1) { (photoModel) in
-            guard let photoModel = photoModel else { return }
-            
-            self.photoSectionList[self.photoSection] = photoModel
-
-            DispatchQueue.main.async {
-                self.view.updatePhotoList(section: self.photoSection)
-                self.isRequestingPhoto = false
-            }
-        }
+        interactor.listPhotos(page: photoSection + 1, topicId: topicId, completion: completion)
     }
 }
 

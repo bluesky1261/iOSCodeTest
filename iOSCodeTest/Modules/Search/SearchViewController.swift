@@ -126,7 +126,7 @@ extension SearchViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
 
-        if position > searchResultCollectionView.contentSize.height - scrollView.frame.size.height - 100 {
+        if position > searchResultCollectionView.contentSize.height - (scrollView.frame.size.height * 2) {
             presenter.requestMorePhoto(searchText: searchTextField.text ?? "")
         }
     }

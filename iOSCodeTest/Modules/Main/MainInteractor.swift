@@ -22,7 +22,7 @@ extension MainInteractor: MainInteractorInterface {
         topicModelService.getTopicList(page: page, completion: completion)
     }
     
-    func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler) {
-        photoModelService.getPhotoList(page: page, completion: completion)
+    func listPhotos(page: Int, topicId: String?, completion: @escaping PhotoListCompletionHandler) {
+        photoModelService.getPhotoList(page: page, topicId: topicId, completion: completion)
     }
 }

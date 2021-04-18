@@ -22,22 +22,43 @@ class PhotoModelService {
 }
 
 extension PhotoModelService {
-    func getPhotoList(page: Int, completion: @escaping PhotoListCompletionHandler) {
+    func getPhotoList(page: Int, topicId: String? = nil, completion: @escaping PhotoListCompletionHandler) {
         let parameters: [String: String] = ["page": "\(page)", "client_id": Server.API_ACCESS_KEY]
 
-        AF.request(Server.LIST_PHOTO_URL, method: .get, parameters: parameters).responseData { (responseData) in
-            switch responseData.result {
-            case .success(let resultData):
-                do {
-                    let photoModel = try [PhotoModel].decode(data: resultData)
-                    completion(photoModel)
-                } catch let decodeError as NSError {
+        // 조회 대상 Topic이 존재하는 경우
+        if let topicId = topicId {
+            let urlByTopic = Server.LIST_TOPIC_URL + "/\(topicId)/photos"
+            AF.request(urlByTopic, method: .get, parameters: parameters).responseData { (responseData) in
+                switch responseData.result {
+                case .success(let resultData):
+                    do {
+                        let photoModel = try [PhotoModel].decode(data: resultData)
+
+                        completion(photoModel)
+                    } catch let decodeError as NSError {
+                        completion(nil)
+                        print(decodeError.localizedDescription)
+                    }
+                case .failure(let error):
                     completion(nil)
-                    print(decodeError.localizedDescription)
+                    print(error.localizedDescription)
                 }
-            case .failure(let error):
-                completion(nil)
-                print(error.localizedDescription)
+            }
+        } else {
+            AF.request(Server.LIST_PHOTO_URL, method: .get, parameters: parameters).responseData { (responseData) in
+                switch responseData.result {
+                case .success(let resultData):
+                    do {
+                        let photoModel = try [PhotoModel].decode(data: resultData)
+                        completion(photoModel)
+                    } catch let decodeError as NSError {
+                        completion(nil)
+                        print(decodeError.localizedDescription)
+                    }
+                case .failure(let error):
+                    completion(nil)
+                    print(error.localizedDescription)
+                }
             }
         }
     }

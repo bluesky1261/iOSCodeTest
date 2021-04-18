@@ -32,6 +32,8 @@ protocol MainPresenterInterface: PresenterInterface {
     func getPhotoSection() -> Int
     func getPhotoSectionList(for section: Int) -> [PhotoModel]
     func getPhotoSectionCount() -> Int
+    func getCurrentTopicIndex() -> Int
+    func updateCurrentTopicIndex(index: Int)
     
     func moveToDetail(section: Int, index: Int)
     func requestMorePhoto()
@@ -39,5 +41,5 @@ protocol MainPresenterInterface: PresenterInterface {
 
 protocol MainInteractorInterface: InteractorInterface {
     func listTopics(page: Int, completion: @escaping TopicListCompletionHandler)
-    func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler)
+    func listPhotos(page: Int, topicId: String?, completion: @escaping PhotoListCompletionHandler)
 }

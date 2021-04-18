@@ -28,7 +28,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="won-qc-8zK">
                                 <rect key="frame" x="0.0" y="29" width="60" height="1"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Zd0-5F-wpE"/>
                                 </constraints>
@@ -57,6 +57,7 @@
             <size key="customSize" width="102" height="50"/>
             <connections>
                 <outlet property="categoryLabel" destination="wmQ-fu-NaI" id="R5A-Cl-sdh"/>
+                <outlet property="selectedView" destination="won-qc-8zK" id="vu6-ua-6Ma"/>
             </connections>
             <point key="canvasLocation" x="-50.724637681159422" y="127.90178571428571"/>
         </collectionViewCell>

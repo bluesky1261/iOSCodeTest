@@ -10,6 +10,7 @@ import UIKit
 class MainCategoryCell: UICollectionViewCell {
 
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var selectedView: UIView!
 
     var topicItem: TopicModel? {
         didSet {
@@ -30,9 +31,15 @@ class MainCategoryCell: UICollectionViewCell {
 
     func initUI() {
         categoryLabel.text = ""
+        selectedView.backgroundColor = .white
     }
 
     func updateCell() {
+        if let topicSelected = topicItem?.topicSelected, topicSelected {
+            selectedView.backgroundColor = .black
+        } else {
+            selectedView.backgroundColor = .white
+        }
         categoryLabel.text = topicItem?.title
     }
 }

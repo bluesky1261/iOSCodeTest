@@ -98,7 +98,7 @@ extension MainViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
 
-        if position > pictureCollectionView.contentSize.height - scrollView.frame.size.height - 100 {
+        if position > pictureCollectionView.contentSize.height - (scrollView.frame.size.height * 2) {
             presenter.requestMorePhoto()
         }
     }
@@ -145,7 +145,7 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-
+            presenter.updateCurrentTopicIndex(index: indexPath.item)
         } else if collectionView == pictureCollectionView {
             collectionView.deselectItem(at: indexPath, animated: false)
             presenter.moveToDetail(section: indexPath.section, index: indexPath.item)

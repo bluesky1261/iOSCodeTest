@@ -18,4 +18,5 @@ struct TopicModel: Codable {
     let ends_at: String?
     let featured: Bool
     let total_photos: UInt32
+    var topicSelected: Bool?
 }
