@@ -14,6 +14,12 @@ final class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailCollectionView: UICollectionView!
 
+    private let titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .center
+
+        return titleLabel
+    }()
     // MARK: - Public properties -
 
     var presenter: DetailPresenterInterface!
@@ -64,14 +70,34 @@ extension DetailViewController: DetailViewInterface {
         let currentPhotoItem = presenter.getPhotoSectionList(for: currentPhotoSection)[currentPhotoIndex]
 
         // Navigation Bar Title 작업
-        let navLabel = UILabel()
-        let navTitle = NSMutableAttributedString(string: currentPhotoItem.user.name, attributes:[
+        changeTitle(name: currentPhotoItem.user.name, sponsorName: currentPhotoItem.sponsorship?.sponsor.name)
+
+        detailCollectionView.reloadData()
+        detailCollectionView.layoutIfNeeded()
+        detailCollectionView.scrollToItem(at: IndexPath(item: currentPhotoIndex, section: currentPhotoSection), at: .centeredHorizontally, animated: false)
+    }
+
+    func updatePhotoList(section: Int) {
+        self.detailCollectionView.insertSections(IndexSet(integer: section))
+        self.detailCollectionView.layoutIfNeeded()
+    }
+}
+
+private extension DetailViewController {
+    @objc func closeButtonTouched(sender: UIBarButtonItem) {
+        presenter.passCurrentPhotoInfo()
+        navigationController?.popViewController(animated: true)
+    }
+
+    func changeTitle(name: String, sponsorName: String?) {
+        titleLabel.numberOfLines = 1
+        let navTitle = NSMutableAttributedString(string: name, attributes:[
                                                     NSAttributedString.Key.foregroundColor: UIColor.black,
                                                     NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15.0)])
 
-        if let sponsorName = currentPhotoItem.sponsorship?.sponsor.name {
-            navLabel.numberOfLines += 1
-            if sponsorName == currentPhotoItem.user.name {
+        if let sponsorName = sponsorName {
+            titleLabel.numberOfLines = 2
+            if sponsorName == name {
                 navTitle.append(NSMutableAttributedString(string: "\nSponsored", attributes:[
                                                             NSAttributedString.Key.foregroundColor: UIColor.gray,
                                                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)]))
@@ -81,29 +107,36 @@ extension DetailViewController: DetailViewInterface {
                                                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)]))
             }
         }
-        navLabel.textAlignment = .center
-        navLabel.attributedText = navTitle
-        self.navigationItem.titleView = navLabel
+        titleLabel.attributedText = navTitle
+        titleLabel.sizeToFit()
 
-        detailCollectionView.reloadData()
-        detailCollectionView.layoutIfNeeded()
-        detailCollectionView.scrollToItem(at: IndexPath(item: currentPhotoIndex, section: currentPhotoSection), at: .centeredHorizontally, animated: false)
-    }
-}
-
-private extension DetailViewController {
-    @objc func closeButtonTouched(sender: UIBarButtonItem) {
-        presenter.passCurrentPhotoInfo()
-        navigationController?.popViewController(animated: true)
+        self.navigationItem.titleView = titleLabel
     }
 }
 
 extension DetailViewController: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard let visibleCell = detailCollectionView.visibleCells.first,
-              let indexPath = detailCollectionView.indexPath(for: visibleCell) else { return }
 
-        presenter.updateCurrentPosition(section: indexPath.section, index: indexPath.item)
+        // Scroll Paging시 indexPath를 가져오는 부분이 문제가 있어 0.1초의 딜레이를 줌
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            guard let visibleCell = self.detailCollectionView.visibleCells.first,
+                  let indexPath = self.detailCollectionView.indexPath(for: visibleCell) else { return }
+
+            // Title 변경
+            let currentPhotoItem = self.presenter.getPhotoSectionList(for: indexPath.section)[indexPath.item]
+            self.changeTitle(name: currentPhotoItem.user.name, sponsorName: currentPhotoItem.sponsorship?.sponsor.name)
+
+            // 현재 Position Update
+            self.presenter.updateCurrentPosition(section: indexPath.section, index: indexPath.item)
+
+            // 현재 조회된 Photo List보다 더 스크롤이 진행될 경우 다음 page 정보를 읽어온다.
+            let maxSectionCount = self.presenter.getSectionCount()
+            let photoInSectionCount = self.presenter.getPhotoSectionList(for: maxSectionCount - 1).count
+
+            if (indexPath.section + 1) == maxSectionCount && indexPath.item > photoInSectionCount - 3 {
+                self.presenter.requestMorePhoto()
+            }
+        }
     }
 }
 

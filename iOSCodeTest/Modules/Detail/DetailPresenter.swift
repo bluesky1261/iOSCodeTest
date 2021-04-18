@@ -22,6 +22,8 @@ final class DetailPresenter {
     private var currentPhotoIndex: Int
     private var photoModels: [Int:[PhotoModel]]
 
+    private var isRequestingPhoto: Bool = false
+    
     // Main Module에 데이터를 전달하기 위한 delegate
     private weak var delegate: DelegatePresenterInterface?
 
@@ -55,6 +57,27 @@ extension DetailPresenter: DetailPresenterInterface {
 
     func getSectionCount() -> Int {
         return photoModels.count
+    }
+
+    func requestMorePhoto() {
+        if !isRequestingPhoto {
+            isRequestingPhoto = true
+
+            // 현재 Section의 갯수는 마지막 Section번호 - 1이므로, 현재 Section 갯수의 Section 번호를 요청한다.
+            let sectionForRequest = photoModels.count
+
+            // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
+            interactor.listPhotos(page: sectionForRequest + 1) { (photoModel) in
+                guard let photoModel = photoModel else { return }
+
+                self.photoModels[sectionForRequest] = photoModel
+
+                DispatchQueue.main.async {
+                    self.view.updatePhotoList(section: sectionForRequest)
+                    self.isRequestingPhoto = false
+                }
+            }
+        }
     }
 
     func updateCurrentPosition(section: Int, index: Int) {

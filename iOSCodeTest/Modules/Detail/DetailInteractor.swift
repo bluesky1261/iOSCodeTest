@@ -11,9 +11,13 @@
 import Foundation
 
 final class DetailInteractor {
+    private let photoModelService = PhotoModelService.shared
 }
 
 // MARK: - Extensions -
 
 extension DetailInteractor: DetailInteractorInterface {
+    func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler) {
+        photoModelService.getPhotoList(page: page, completion: completion)
+    }
 }

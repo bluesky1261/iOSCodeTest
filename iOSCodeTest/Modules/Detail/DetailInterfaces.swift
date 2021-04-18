@@ -14,6 +14,7 @@ protocol DetailWireframeInterface: WireframeInterface {
 }
 
 protocol DetailViewInterface: ViewInterface {
+    func updatePhotoList(section: Int)
 }
 
 protocol DetailPresenterInterface: PresenterInterface {
@@ -21,10 +22,12 @@ protocol DetailPresenterInterface: PresenterInterface {
     func getCurrentPhotoIndex() -> Int
     func getPhotoSectionList(for section: Int) -> [PhotoModel]
     func getSectionCount() -> Int
+    func requestMorePhoto()
 
     func updateCurrentPosition(section: Int, index: Int)
     func passCurrentPhotoInfo()
 }
 
 protocol DetailInteractorInterface: InteractorInterface {
+    func listPhotos(page: Int, completion: @escaping PhotoListCompletionHandler)
 }
