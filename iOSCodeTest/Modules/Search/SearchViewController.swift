@@ -182,7 +182,6 @@ extension SearchViewController: UICollectionViewDataSource {
             searchTextField.text = searchText
             searchTextField.resignFirstResponder()
 
-            presenter.clearSearch()
             presenter.searchPhoto(searchText: searchText)
             switchScreenMode(to: .searchResult)
         }
@@ -219,7 +218,6 @@ extension SearchViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
 
         presenter.saveSearchHistory(searchText: searchText)
-        presenter.clearSearch()
         presenter.searchPhoto(searchText: searchText)
 
         switchScreenMode(to: .searchResult)

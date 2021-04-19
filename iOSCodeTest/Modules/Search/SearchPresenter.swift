@@ -61,14 +61,16 @@ extension SearchPresenter: SearchPresenterInterface {
 
     func searchPhoto(searchText: String) {
         isRequestingPhoto = true
+        clearSearch()
         // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
-        interactor.searchPhoto(page: searchSection + 1, searchText: searchText) { (photoModel) in
+        searchPhoto(searchText: searchText) { (photoModel) in
             guard let photoModel = photoModel else { return }
 
             self.searchSectionList[self.searchSection] = photoModel
 
             DispatchQueue.main.async {
-                self.view.updateSearchList(section: self.searchSection)
+                self.view.updateSearchList()
+                self.view.updateSearchListWithPosition(currentSection: 0, currentIndex: 0)
                 self.isRequestingPhoto = false
             }
         }
@@ -93,13 +95,30 @@ extension SearchPresenter: SearchPresenterInterface {
     func requestMorePhoto(searchText: String) {
         if !isRequestingPhoto {
             searchSection += 1
-            searchPhoto(searchText: searchText)
+            searchPhoto(searchText: searchText) { (photoModel) in
+                guard let photoModel = photoModel else { return }
+
+                self.searchSectionList[self.searchSection] = photoModel
+
+                DispatchQueue.main.async {
+                    self.view.updateSearchList(section: self.searchSection)
+                    self.isRequestingPhoto = false
+                }
+            }
         }
     }
 
     func clearSearch() {
         searchSection = 0
         searchSectionList = .init()
+    }
+}
+
+private extension SearchPresenter {
+    func searchPhoto(searchText: String, completion: @escaping PhotoListCompletionHandler) {
+        isRequestingPhoto = true
+        // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
+        interactor.searchPhoto(page: searchSection + 1, searchText: searchText, completion: completion)
     }
 }
 
