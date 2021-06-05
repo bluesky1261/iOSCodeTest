@@ -129,7 +129,15 @@ extension MainViewController: UICollectionViewDataSource {
         if collectionView == categoryCollectionView {
             let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainCategoryCell.self), for: indexPath) as! MainCategoryCell
 
-            cell.topicItem = presenter.getTopicSectionList(for: indexPath.section)[indexPath.item]
+            var topicItem = presenter.getTopicSectionList(for: indexPath.section)[indexPath.item]
+
+            if indexPath.item == presenter.getCurrentTopicIndex() {
+                topicItem.topicSelected = true
+            } else {
+                topicItem.topicSelected = false
+            }
+
+            cell.topicItem = topicItem
 
             return cell
         } else if collectionView == pictureCollectionView {
