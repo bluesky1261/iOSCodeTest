@@ -54,7 +54,7 @@ class MainPictureCell: UICollectionViewCell {
                 currentRequest = photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: UIScreen.main.bounds.size) { (image) in
                     guard let image = image else { return }
 
-                    self.pictureImageView.image = image
+                    self.pictureImageView.image = image.resizedImage(with: CGSize(width: image.size.width, height: image.size.height))
                     self.currentRequest = nil
                 }
             }

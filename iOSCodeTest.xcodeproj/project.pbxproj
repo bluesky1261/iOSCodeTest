@@ -56,6 +56,7 @@
 		624B478A2628271300BC7D82 /* DetailPictureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624B47882628271300BC7D82 /* DetailPictureCell.xib */; };
 		624B479F2628365100BC7D82 /* MainCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624B479D2628365100BC7D82 /* MainCategoryCell.swift */; };
 		624B47A02628365100BC7D82 /* MainCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624B479E2628365100BC7D82 /* MainCategoryCell.xib */; };
+		628B29AD266BD09C00870570 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628B29AC266BD09C00870570 /* UIImage+Extension.swift */; };
 		62BAB74126272008002903B4 /* MainPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BAB73F26272008002903B4 /* MainPictureCell.swift */; };
 		62BAB74226272008002903B4 /* MainPictureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62BAB74026272008002903B4 /* MainPictureCell.xib */; };
 		62BAB7AA26273BE1002903B4 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62BAB7A426273BE1002903B4 /* Detail.storyboard */; };
@@ -140,6 +141,7 @@
 		624B47882628271300BC7D82 /* DetailPictureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailPictureCell.xib; sourceTree = "<group>"; };
 		624B479D2628365100BC7D82 /* MainCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoryCell.swift; sourceTree = "<group>"; };
 		624B479E2628365100BC7D82 /* MainCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCategoryCell.xib; sourceTree = "<group>"; };
+		628B29AC266BD09C00870570 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		62BAB73F26272008002903B4 /* MainPictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPictureCell.swift; sourceTree = "<group>"; };
 		62BAB74026272008002903B4 /* MainPictureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainPictureCell.xib; sourceTree = "<group>"; };
 		62BAB7A426273BE1002903B4 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				6237D3E42626D683000A3AF0 /* UIViewController+Extension.swift */,
 				6237D3EC2626D69D000A3AF0 /* UINavigationController+Extension.swift */,
 				6237D3F12626DA50000A3AF0 /* UIStoryboard+Extension.swift */,
+				628B29AC266BD09C00870570 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				624B47892628271300BC7D82 /* DetailPictureCell.swift in Sources */,
 				62163FB126295FA300F68086 /* PhotoModelServices.swift in Sources */,
 				62017DED262A689B0043B9E4 /* MainTabWireframe.swift in Sources */,
+				628B29AD266BD09C00870570 /* UIImage+Extension.swift in Sources */,
 				6237D3BA2626D4FC000A3AF0 /* MainWireframe.swift in Sources */,
 				62163FD42629711900F68086 /* TopicModelServices.swift in Sources */,
 				6237D3B92626D4FC000A3AF0 /* MainInteractor.swift in Sources */,
