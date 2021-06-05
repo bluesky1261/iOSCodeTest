@@ -9,18 +9,36 @@ import Foundation
 
 struct PhotoModel: Codable {
     let id: String
-    let created_at: String
-    let updated_at: String
+    let createdAt: String
+    let updatedAt: String
     let width: UInt32
     let height: UInt32
     let color: String
-    let blur_hash: String?
+    let blurHash: String?
     let likes: UInt32
-    let liked_by_user: Bool
+    let likedByUser: Bool
     let description: String?
     let urls:PhotoUrlModel
     let user: UserModel
     let sponsorship: Sponsorship?
+
+    // 서버상의 snake case 매핑을 camal case 매핑으로 변경
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case width
+        case height
+        case color
+        case blurHash = "blur_hash"
+        case likes
+        case likedByUser = "liked_by_user"
+        case description
+        case urls
+        case user
+        case sponsorship
+    }
+
 }
 
 struct PhotoUrlModel: Codable {
@@ -33,6 +51,13 @@ struct PhotoUrlModel: Codable {
 
 struct PhotoSearchResultModel: Codable {
     let total: UInt32
-    let total_pages: UInt32
+    let totalPages: UInt32
     let results: [PhotoModel]
+
+    // 서버상의 snake case 매핑을 camal case 매핑으로 변경
+    private enum CodingKeys: String, CodingKey {
+        case total
+        case totalPages = "total_pages"
+        case results
+    }
 }
