@@ -15,13 +15,14 @@ typealias PhotoImageCompletionHandler = (Image?) -> Void
 class PhotoModelService {
     static let shared = PhotoModelService()
 
-    // Cache
+    // 이미지 캐시를 위한 변수
     let imageCache = AutoPurgingImageCache(memoryCapacity: 256_000_000, preferredMemoryUsageAfterPurge: 128_000)
 
     private init() { }
 }
 
 extension PhotoModelService {
+    /// 서버로부터 네트워크 통신을 통하여 사진 리스트를 받아오는 함수.
     func getPhotoList(page: Int, topicId: String? = nil, completion: @escaping PhotoListCompletionHandler) {
         let parameters: [String: String] = ["page": "\(page)", "client_id": Server.API_ACCESS_KEY]
 
@@ -44,6 +45,7 @@ extension PhotoModelService {
                     print(error.localizedDescription)
                 }
             }
+        // 조회 대상 Topic이 존재하지 않는 경우
         } else {
             AF.request(Server.LIST_PHOTO_URL, method: .get, parameters: parameters).responseData { (responseData) in
                 switch responseData.result {
@@ -63,6 +65,7 @@ extension PhotoModelService {
         }
     }
 
+    /// 서버로부터 사진 URL 정보를 통하여 실제 사진을 받아오는 함수.
     func loadPhotoImage(imageUrl: String, frameSize: CGSize, completion: @escaping PhotoImageCompletionHandler) {
         let devicePixelRatio = Int(UIScreen.main.scale)
         let parameters: [String: String] = ["w": "\(Int(frameSize.width))"
@@ -84,6 +87,7 @@ extension PhotoModelService {
         }
     }
 
+    /// 검색어를 통하여 검색어에 해당하는 사진 리스트를 받아오는 함수.
     func searchPhoto(page: Int, searchText: String, completion: @escaping PhotoListCompletionHandler) {
         let parameters: [String: String] = ["page": "\(page)", "query": "\(searchText)", "client_id": Server.API_ACCESS_KEY]
 

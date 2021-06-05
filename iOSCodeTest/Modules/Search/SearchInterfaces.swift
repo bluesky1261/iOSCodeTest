@@ -15,35 +15,53 @@ enum SearchNavigationOption {
 }
 
 protocol SearchWireframeInterface: WireframeInterface {
+    /// 다른 화면으로 이동하기 위한 함수
     func navigate(to option: SearchNavigationOption)
 }
 
 protocol SearchViewInterface: ViewInterface {
+    /// 검색어 히스토리를 갱신하기 위한 함수
     func updateSearchHistory()
+    /// 검색 결과 사진 정보를 갱신하기 위한 함수
     func updateSearchList()
+    /// 특정 섹션에 해당하는 검색 결과 사진 정보를 갱신하기 위한 함수
     func updateSearchList(section: Int)
+    /// 검색 결과 사진 정보를 갱신 하면서 현재 화면의 위치를 특정 포지션으로 옮기는 함수
     func updateSearchListWithPosition(currentSection: Int, currentIndex: Int)
 }
 
 protocol SearchPresenterInterface: PresenterInterface {
+    /// 검색어 히스토리 리스트를 가져오는 함수 (Getter)
     func getSearchHistory() -> [SearchHistoryModel]
+    /// 특정 검색어를 검색어 히스토리에 저장하기 위한 함수
     func saveSearchHistory(searchText: String)
+    /// 검색어 히스토리를 Local 저장소에서 조회해오는 함수
     func loadSearchHistory()
+    /// 검색어 히스토리를 초기화하는 함수
     func clearSearchHistory()
-
+    /// 특정 검색어에 해당하는 사진 리스트를 조회해오는 함수
     func searchPhoto(searchText: String)
+    /// 현재 사진 검색의 섹션 번호를 리턴하는 함수
     func getSearchSection() -> Int
+    /// 검색 결과의 특정 섹션에 해당하는 사진 리스트를 리턴하는 함수
     func getSearchSectionList(for section: Int) -> [PhotoModel]
+    /// 검색 결과의 섹션 갯수를 리턴하는 함수
     func getSearchSectionCount() -> Int
-
+    ///사진 Detail 화면으로 이동하기 위한 함수
     func moveToDetail(section: Int, index: Int)
+    /// 추가로 네트워크를 통한 특정 검색어의 사진 조회를 요청하는 함수
     func requestMorePhoto(searchText: String)
+    /// 검색어 Text 초기화 함수
     func clearSearch()
 }
 
 protocol SearchInteractorInterface: InteractorInterface {
+    /// 특정 검색어를 검색어 히스토리에 저장하는 함수
     func saveSearchHistory(searchText: String)
+    /// 검색어 히스토리 리스트를 조회해오는 함수
     func loadSearchHistory() -> [SearchHistoryModel]
+    /// 검색어 히스토리를 초기화하는 함수
     func clearSearchHistory()
+    /// 특정 검색어에 해당하는 사진 리스트를 조회해오는 함수
     func searchPhoto(page: Int, searchText: String, completion: @escaping PhotoListCompletionHandler)
 }

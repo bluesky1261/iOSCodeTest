@@ -109,6 +109,7 @@ extension SearchViewController: SearchViewInterface {
     }
 }
 
+// MARK: - Private Extensions -
 private extension SearchViewController {
     func switchScreenMode(to mode: ScreenMode) {
         switch mode {
@@ -122,6 +123,7 @@ private extension SearchViewController {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDelegate -
 extension SearchViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
@@ -132,6 +134,7 @@ extension SearchViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDataSource -
 extension SearchViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == searchResultCollectionView {
@@ -189,6 +192,7 @@ extension SearchViewController: UICollectionViewDataSource {
 
 }
 
+// MARK: - Extensions: UICollectionViewDelegateFlowLayout -
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == searchResultCollectionView {
@@ -209,6 +213,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - Extensions: UITextFieldDelegate -
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let searchText = textField.text, searchText != ""  else {

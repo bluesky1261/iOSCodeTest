@@ -17,6 +17,7 @@ class TopicModelService {
 }
 
 extension TopicModelService {
+    /// 서버로부터 네트워크 통신을 통하여 카테고리의 리스트를 받아오는 함수.
     func getTopicList(page: Int, completion: @escaping TopicListCompletionHandler) {
         let parameters: [String: String] = ["page": "\(page)", "client_id": Server.API_ACCESS_KEY]
 

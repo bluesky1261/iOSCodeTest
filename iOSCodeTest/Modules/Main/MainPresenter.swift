@@ -116,6 +116,7 @@ extension MainPresenter: MainPresenterInterface {
     }
 }
 
+// MARK: - Private Extensions -
 private extension MainPresenter {
     func listTopic() {
         // Unsplash API는 1페이지부터 유의미한 데이터가 존재하여 section + 1을 함. Section:0 -> Page:1
@@ -147,6 +148,7 @@ private extension MainPresenter {
     }
 }
 
+// MARK: - Extensions: DelegatePresenterInterface -
 extension MainPresenter: DelegatePresenterInterface {
     func passData(sender: PresenterInterface, data: [String : Any]?) {
         switch sender {

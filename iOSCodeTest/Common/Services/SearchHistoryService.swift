@@ -14,6 +14,7 @@ class SearchHistoryService {
 }
 
 extension SearchHistoryService {
+    /// 검색어를 로컬 스토리지의 검색어 히스토리 영역에 저장하는 함수.
     func saveSearchHistory(keyword: String) {
         let newSearchModel = SearchHistoryModel(searchText: keyword, savedDate: Date())
         let historyList = loadSearchHistory()
@@ -32,6 +33,7 @@ extension SearchHistoryService {
         repository.setValue(data, forKey: Constant.SEARCH_HISTORY_REPO_KEY)
     }
 
+    /// 로컬 스토리지에서 검색어 히스토리를 조회하는 함수.
     func loadSearchHistory() -> [SearchHistoryModel] {
         let repository = UserDefaults.standard
         if let data = repository.object(forKey: Constant.SEARCH_HISTORY_REPO_KEY) as? Data {
@@ -45,6 +47,7 @@ extension SearchHistoryService {
         return [SearchHistoryModel]()
     }
 
+    /// 검색어 히스토리를 초기화 하는 함수.
     func clearSearchHistory() {
         let repository = UserDefaults.standard
         repository.setValue([SearchHistoryModel]().jsonData, forKey: Constant.SEARCH_HISTORY_REPO_KEY)

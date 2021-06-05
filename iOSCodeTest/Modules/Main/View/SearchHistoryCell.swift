@@ -29,7 +29,7 @@ class SearchHistoryCell: UICollectionViewCell {
     }
 
     func initUI() {
-
+        searchTextLabel.text = ""
     }
 
     func updateCell() {

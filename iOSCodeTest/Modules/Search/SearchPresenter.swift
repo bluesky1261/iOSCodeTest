@@ -114,6 +114,7 @@ extension SearchPresenter: SearchPresenterInterface {
     }
 }
 
+// MARK: - Private Extensions -
 private extension SearchPresenter {
     func searchPhoto(searchText: String, completion: @escaping PhotoListCompletionHandler) {
         isRequestingPhoto = true
@@ -122,6 +123,7 @@ private extension SearchPresenter {
     }
 }
 
+// MARK: - Extensions: DelegatePresenterInterface -
 extension SearchPresenter: DelegatePresenterInterface {
     func passData(sender: PresenterInterface, data: [String : Any]?) {
         switch sender {

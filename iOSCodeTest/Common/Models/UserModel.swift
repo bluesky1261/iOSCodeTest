@@ -2,6 +2,7 @@
 //  UserModel.swift
 //  iOSCodeTest
 //
+//  사진에 매핑된 사용자 정보를 받아오기 위한 객체들의 집합
 //  Created by Joonghoo Im on 2021/04/16.
 //
 

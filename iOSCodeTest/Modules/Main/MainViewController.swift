@@ -94,6 +94,7 @@ extension MainViewController: MainViewInterface {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDelegate -
 extension MainViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
@@ -104,6 +105,7 @@ extension MainViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDataSource -
 extension MainViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == categoryCollectionView {
@@ -162,6 +164,7 @@ extension MainViewController: UICollectionViewDataSource {
 
 }
 
+// MARK: - Extensions: UICollectionViewDelegateFlowLayout -
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == pictureCollectionView {

@@ -83,6 +83,7 @@ extension DetailViewController: DetailViewInterface {
     }
 }
 
+// MARK: - Private Extensions -
 private extension DetailViewController {
     @objc func closeButtonTouched(sender: UIBarButtonItem) {
         presenter.passCurrentPhotoInfo()
@@ -114,6 +115,7 @@ private extension DetailViewController {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDelegate -
 extension DetailViewController: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
@@ -140,6 +142,7 @@ extension DetailViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDataSource -
 extension DetailViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return presenter.getSectionCount()
@@ -158,6 +161,7 @@ extension DetailViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - Extensions: UICollectionViewDelegateFlowLayout -
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return detailCollectionView.frame.size

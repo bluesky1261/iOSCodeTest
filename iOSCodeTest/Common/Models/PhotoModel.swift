@@ -2,6 +2,7 @@
 //  PhotoModel.swift
 //  iOSCodeTest
 //
+//  사진을 서버에서 가져올 때 필요한 모델 객체들의 집합
 //  Created by Joonghoo Im on 2021/04/16.
 //
 

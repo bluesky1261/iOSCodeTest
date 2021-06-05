@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
 
-        // 최초 화면은 MainTabWireframe (UITabBarController)
+        // 전체 메뉴를 TabBar로 구성하여 최초 화면은 MainTabWireframe (UITabBarController)
         let tabBarController = MainTabWireframe().viewController
 
         window?.rootViewController = tabBarController
