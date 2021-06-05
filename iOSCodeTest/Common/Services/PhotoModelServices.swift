@@ -65,8 +65,8 @@ extension PhotoModelService {
         }
     }
 
-    /// 서버로부터 사진 URL 정보를 통하여 실제 사진을 받아오는 함수.
-    func loadPhotoImage(imageUrl: String, frameSize: CGSize, completion: @escaping PhotoImageCompletionHandler) {
+    /// 서버로부터 사진 URL 정보를 통하여 실제 사진을 받아오는 함수. DataRequest를 리턴값으로 넘기는 이유는 함수 호출부에서 요청을 Cancel시킬 수 있게 하기 위함.
+    func loadPhotoImage(imageUrl: String, frameSize: CGSize, completion: @escaping PhotoImageCompletionHandler) -> DataRequest {
         let devicePixelRatio = Int(UIScreen.main.scale)
         let parameters: [String: String] = ["w": "\(Int(frameSize.width))"
                                             , "dpr": "\(devicePixelRatio)"
@@ -74,7 +74,8 @@ extension PhotoModelService {
                                             , "fit": "max"
                                             , "q": "80"]
 
-        AF.request(imageUrl, parameters: parameters).responseImage { (response) in
+        let request = AF.request(imageUrl, parameters: parameters)
+        request.responseImage { (response) in
             switch response.result {
             case .success(let image):
 
@@ -85,6 +86,8 @@ extension PhotoModelService {
                 print(error.localizedDescription)
             }
         }
+
+        return request
     }
 
     /// 검색어를 통하여 검색어에 해당하는 사진 리스트를 받아오는 함수.

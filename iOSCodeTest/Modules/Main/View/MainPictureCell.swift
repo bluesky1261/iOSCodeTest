@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainPictureCell: UICollectionViewCell {
 
@@ -21,6 +22,8 @@ class MainPictureCell: UICollectionViewCell {
         }
     }
 
+    private var currentRequest: DataRequest?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -33,6 +36,11 @@ class MainPictureCell: UICollectionViewCell {
     }
 
     func initUI() {
+        // Cell 초기화시 진행중인 Network Request가 존재한다면 종료 처리
+        if let currentRequest = currentRequest {
+            currentRequest.cancel()
+        }
+
         pictureImageView.image = nil
         pictureNameLabel.text = ""
         sponsorNameLabel.text = ""
@@ -43,10 +51,11 @@ class MainPictureCell: UICollectionViewCell {
             if let image = photoModelService.imageCache.image(withIdentifier: imageUrl) {
                 self.pictureImageView.image = image
             } else {
-                photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: UIScreen.main.bounds.size) { (image) in
+                currentRequest = photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: UIScreen.main.bounds.size) { (image) in
                     guard let image = image else { return }
 
                     self.pictureImageView.image = image
+                    self.currentRequest = nil
                 }
             }
         }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class DetailPictureCell: UICollectionViewCell {
     private let photoModelService = PhotoModelService.shared
@@ -17,6 +18,8 @@ class DetailPictureCell: UICollectionViewCell {
             updateCell()
         }
     }
+
+    private var currentRequest: DataRequest?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +33,11 @@ class DetailPictureCell: UICollectionViewCell {
     }
 
     func initUI() {
+        // Cell 초기화시 진행중인 Network Request가 존재한다면 종료 처리
+        if let currentRequest = currentRequest {
+            currentRequest.cancel()
+        }
+
         detailPictureImageView.image = nil
     }
 
@@ -38,10 +46,11 @@ class DetailPictureCell: UICollectionViewCell {
             if let image = photoModelService.imageCache.image(withIdentifier: imageUrl) {
                 self.detailPictureImageView.image = image
             } else {
-                photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: detailPictureImageView.bounds.size) { (image) in
+                currentRequest = photoModelService.loadPhotoImage(imageUrl: imageUrl, frameSize: detailPictureImageView.bounds.size) { (image) in
                     guard let image = image else { return }
 
                     self.detailPictureImageView.image = image
+                    self.currentRequest = nil
                 }
             }
         }
